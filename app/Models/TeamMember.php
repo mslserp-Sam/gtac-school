@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class TeamMember extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
+        'name',
+        'position',
+        'bio',
         'image_path',
-        'category',
-        'level',
-        'duration',
-        'brochure_path',
         'sort_order',
         'is_active',
     ];
@@ -25,4 +22,3 @@ class Course extends Model
         'is_active' => 'boolean',
     ];
 }
-

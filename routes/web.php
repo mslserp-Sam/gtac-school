@@ -55,6 +55,13 @@ Route::middleware('auth')->group(function () {
         
         // Pages management
         Route::resource('pages', \App\Http\Controllers\Admin\PageController::class);
+        
+        // Home settings management
+        Route::get('home-settings', [\App\Http\Controllers\Admin\HomeSettingsController::class, 'index'])->name('home-settings.index');
+        Route::post('home-settings', [\App\Http\Controllers\Admin\HomeSettingsController::class, 'update'])->name('home-settings.update');
+        
+        // Team members management
+        Route::resource('team-members', \App\Http\Controllers\Admin\TeamMemberController::class);
     });
 });
 

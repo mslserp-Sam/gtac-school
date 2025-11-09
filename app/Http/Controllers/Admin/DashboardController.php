@@ -19,6 +19,7 @@ class DashboardController extends Controller
                 'gallery_images' => GalleryImage::count(),
                 'contact_inquiries' => ContactInquiry::where('status', 'new')->count(),
                 'pages' => Page::count(),
+                'team_members' => \App\Models\TeamMember::count(),
             ],
         ]);
     }

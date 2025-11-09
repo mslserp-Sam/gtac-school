@@ -164,3 +164,92 @@ nav.sticky {
 .parallax-fast {
     transform: translateY(calc(var(--scroll-y) * 0.7px));
 }
+
+/* HTML Content Styling */
+.prose {
+    line-height: 1.75;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.prose p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.prose ul,
+.prose ol {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    padding-left: 1.625em;
+}
+
+.prose ul {
+    list-style-type: disc;
+}
+
+.prose ol {
+    list-style-type: decimal;
+}
+
+.prose li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.prose li p {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
+
+.prose strong {
+    font-weight: 600;
+    color: inherit;
+}
+
+.prose a {
+    color: #37584a;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.prose a:hover {
+    color: #2d463d;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.prose h1 {
+    font-size: 2.25em;
+}
+
+.prose h2 {
+    font-size: 1.5em;
+}
+
+.prose h3 {
+    font-size: 1.25em;
+}
+
+.prose h4 {
+    font-size: 1em;
+}
+
+.prose :first-child {
+    margin-top: 0;
+}
+
+.prose :last-child {
+    margin-bottom: 0;
+}

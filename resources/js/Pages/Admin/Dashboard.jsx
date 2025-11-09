@@ -81,9 +81,20 @@ export default function Dashboard({ stats }) {
                     <ul className="list-disc list-inside text-gray-600 space-y-2">
                         <li><strong>Courses:</strong> Add, edit, and manage course offerings</li>
                         <li><strong>Gallery:</strong> Upload and organize gallery images</li>
+                        <li><strong>Team Members:</strong> Manage team member profiles and photos</li>
                         <li><strong>Contact Inquiries:</strong> View and respond to contact form submissions</li>
                         <li><strong>Pages:</strong> Manage page content including Vision, Mission, and About sections</li>
+                        <li><strong>Home Settings:</strong> Customize hero section, core values, and contact information</li>
                     </ul>
+                    
+                    <div className="mt-6">
+                        <Link 
+                            href="/admin/home-settings" 
+                            className="inline-block bg-gtac-600 text-white px-6 py-2 rounded-md hover:bg-gtac-700"
+                        >
+                            Edit Home Settings
+                        </Link>
+                    </div>
                 </div>
             </div>
         </AdminLayout>
