@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes - Single page website
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Legacy routes that redirect to home page sections
 Route::get('/courses', function () {

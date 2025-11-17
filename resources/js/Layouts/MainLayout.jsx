@@ -1,18 +1,22 @@
 import { Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
-import { useStickyNav, useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export default function MainLayout({ children }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
-    const isSticky = useStickyNav();
+    const [isScrolled, setIsScrolled] = useState(false);
     useScrollAnimation();
 
     useEffect(() => {
         const handleScroll = () => {
-            setShowScrollTop(window.scrollY > 400);
+            const scrollY = window.scrollY;
+            setShowScrollTop(scrollY > 400);
+            setIsScrolled(scrollY > 0);
         };
         window.addEventListener('scroll', handleScroll);
+        // Initial check
+        handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -81,13 +85,21 @@ export default function MainLayout({ children }) {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Navigation */}
-            <nav className={`absolute top-0 left-0 right-0 transition-all duration-300 z-50 ${isSticky ? 'fixed backdrop-blur-md bg-white/90 shadow-lg' : ''}`}>
+            <nav className={`fixed top-0 left-0 right-0 transition-all duration-300 z-50 ${
+                isScrolled 
+                    ? 'bg-gtac-600 shadow-lg' 
+                    : 'bg-transparent'
+            }`}>
                 <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo - Left */}
                         <div className="flex-shrink-0">
                             <Link href="/">
-                                <div className={`px-3 pb-2 pt-5 rounded-b-lg transition-all duration-300 ${isSticky ? '' : 'bg-white/90 backdrop-blur-sm'}`}>
+                                <div className={`px-3 pb-2 pt-5 rounded-b-lg transition-all duration-300 ${
+                                    isScrolled 
+                                        ? 'bg-white/90 backdrop-blur-sm' 
+                                        : 'bg-white/90 backdrop-blur-sm'
+                                }`}>
                                     <img 
                                         src="/images/gtacLogo.png" 
                                         alt="GTAC School Logo" 
@@ -111,8 +123,8 @@ export default function MainLayout({ children }) {
                                         }
                                     }}
                                     className={`px-3 py-2 text-md font-medium transition-colors duration-200 ${
-                                        isSticky 
-                                            ? 'text-gray-700 hover:text-gtac-600' 
+                                        isScrolled 
+                                            ? 'text-white hover:text-gtac-200' 
                                             : 'text-white hover:text-gtac-200'
                                     }`}
                                 >
@@ -124,8 +136,8 @@ export default function MainLayout({ children }) {
                             <button
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                                 className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-200 ${
-                                    isSticky 
-                                        ? 'text-gray-700 hover:text-gtac-600' 
+                                    isScrolled 
+                                        ? 'text-white hover:text-gtac-200' 
                                         : 'text-white hover:text-gtac-200'
                                 }`}
                             >

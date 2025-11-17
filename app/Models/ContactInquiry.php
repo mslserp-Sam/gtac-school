@@ -11,8 +11,13 @@ class ContactInquiry extends Model
 
     protected $fillable = [
         'name',
+        'full_name',
         'email',
         'phone',
+        'contact_number',
+        'exact_address',
+        'working_industry',
+        'civil_status',
         'subject',
         'message',
         'status',

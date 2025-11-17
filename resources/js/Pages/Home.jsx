@@ -1,11 +1,33 @@
 import MainLayout from '../Layouts/MainLayout';
 import { useState } from 'react';
+import { useForm, usePage } from '@inertiajs/react';
 
 export default function Home({ homePage, courses, galleryImages, vision, mission, about, teamMembers, homeSettings, latitude, longitude, address }) {
     const [selectedImage, setSelectedImage] = useState(null);
+    const { flash } = usePage().props;
     
     // Default settings if not provided
     const settings = homeSettings || {};
+
+    // Contact form
+    const { data: contactData, setData: setContactData, post: contactPost, processing: contactProcessing, errors: contactErrors, reset: contactReset } = useForm({
+        full_name: '',
+        contact_number: '',
+        exact_address: '',
+        email: '',
+        working_industry: '',
+        civil_status: '',
+    });
+
+    const handleContactSubmit = (e) => {
+        e.preventDefault();
+        contactPost('/contact', {
+            preserveScroll: true,
+            onSuccess: () => {
+                contactReset();
+            },
+        });
+    };
 
     // Helper function to format HTML content - handles malformed HTML and plain text
     const formatHtmlContent = (content) => {
@@ -477,39 +499,103 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                         {/* Contact Form */}
                         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 scroll-reveal border border-gray-100">
                             <h3 className="text-2xl font-bold mb-6 text-gtac-700 font-montserrat">Send us a Message</h3>
-                            <form id="contact-form" className="space-y-5">
+                            
+                            {flash?.success && (
+                                <div className="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
+                                    {flash.success}
+                                </div>
+                            )}
+
+                            <form onSubmit={handleContactSubmit} className="space-y-5">
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name (include middle name) *</label>
                                     <input
                                         type="text"
                                         required
+                                        value={contactData.full_name}
+                                        onChange={(e) => setContactData('full_name', e.target.value)}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
-                                        placeholder="Your full name"
+                                        placeholder="First Middle Last Name"
                                     />
+                                    {contactErrors.full_name && <div className="text-red-500 text-sm mt-1">{contactErrors.full_name}</div>}
                                 </div>
+                                
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Contact Number *</label>
+                                    <input
+                                        type="tel"
+                                        required
+                                        value={contactData.contact_number}
+                                        onChange={(e) => setContactData('contact_number', e.target.value)}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
+                                        placeholder="09XX-XXX-XXXX"
+                                    />
+                                    {contactErrors.contact_number && <div className="text-red-500 text-sm mt-1">{contactErrors.contact_number}</div>}
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Exact Address *</label>
+                                    <textarea
+                                        rows="3"
+                                        required
+                                        value={contactData.exact_address}
+                                        onChange={(e) => setContactData('exact_address', e.target.value)}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all resize-none"
+                                        placeholder="Street, Barangay, City, Province"
+                                    />
+                                    {contactErrors.exact_address && <div className="text-red-500 text-sm mt-1">{contactErrors.exact_address}</div>}
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
                                     <input
                                         type="email"
                                         required
+                                        value={contactData.email}
+                                        onChange={(e) => setContactData('email', e.target.value)}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
                                         placeholder="your.email@example.com"
                                     />
+                                    {contactErrors.email && <div className="text-red-500 text-sm mt-1">{contactErrors.email}</div>}
                                 </div>
+
                                 <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
-                                    <textarea
-                                        rows="5"
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Working Industry or Working Experience *</label>
+                                    <input
+                                        type="text"
                                         required
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all resize-none"
-                                        placeholder="Your message here..."
+                                        value={contactData.working_industry}
+                                        onChange={(e) => setContactData('working_industry', e.target.value)}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
+                                        placeholder="e.g., IT, Healthcare, Education, etc."
                                     />
+                                    {contactErrors.working_industry && <div className="text-red-500 text-sm mt-1">{contactErrors.working_industry}</div>}
                                 </div>
+
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Civil Status *</label>
+                                    <select
+                                        required
+                                        value={contactData.civil_status}
+                                        onChange={(e) => setContactData('civil_status', e.target.value)}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
+                                    >
+                                        <option value="">Select Civil Status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Widowed">Widowed</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Separated">Separated</option>
+                                    </select>
+                                    {contactErrors.civil_status && <div className="text-red-500 text-sm mt-1">{contactErrors.civil_status}</div>}
+                                </div>
+
                                 <button
                                     type="submit"
-                                    className="w-full bg-gtac-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-gtac-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                                    disabled={contactProcessing}
+                                    className="w-full bg-gtac-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-gtac-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    Send Message
+                                    {contactProcessing ? 'Submitting...' : 'Submit'}
                                 </button>
                             </form>
                         </div>

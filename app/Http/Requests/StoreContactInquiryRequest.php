@@ -22,11 +22,16 @@ class StoreContactInquiryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'full_name' => 'required|string|max:255',
+            'contact_number' => 'required|string|max:255',
+            'exact_address' => 'required|string',
             'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:255',
+            'working_industry' => 'required|string|max:255',
+            'civil_status' => 'required|string|max:255',
+            'name' => 'nullable|string|max:255', // Keep for backward compatibility
+            'phone' => 'nullable|string|max:255', // Keep for backward compatibility
             'subject' => 'nullable|string|max:255',
-            'message' => 'required|string',
+            'message' => 'nullable|string',
         ];
     }
 }
