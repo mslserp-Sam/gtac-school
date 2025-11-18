@@ -2,7 +2,7 @@ name: build_and_deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: ["main"]
 
 jobs:
   build_and_deploy:
@@ -10,39 +10,32 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 18
 
-      - name: Install Dependencies
-        run: npm ci
+      - name: Install dependencies
+        run: npm install
 
       - name: Build Frontend Assets
         run: npm run build
 
-      # Create a clean build folder to upload only what’s needed
       - name: Prepare build folder
         run: |
           mkdir -p public/build
           cp -r build/assets public/build/assets
-          cp -r build/manifest.json public/build/
+          cp build/manifest.json public/build/
+          cp build/index.html public/build/
 
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.HOSTINGER_HOST }}
+          server: ${{ secrets.HOSTINGER_SERVER }}
           port: ${{ secrets.HOSTINGER_PORT }}
-          username: ${{ secrets.HOSTINGER_USER }}
-          password: ${{ secrets.HOSTINGER_PASS }}
-
-          # Upload only frontend build
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
           local_path: "public/build"
-
-          # This becomes: public_html/gtac/public/build
-          remote_path: ${{ secrets.HOSTINGER_PATH }}/build
-
-          sftp_only: false
-          delete_remote_files: false
+          remote_path: "${{ secrets.HOSTINGER_PATH }}/build"

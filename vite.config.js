@@ -12,9 +12,15 @@ export default defineConfig({
             include: 'resources/js/**/*.{jsx,tsx}',
         }),
     ],
+
     resolve: {
         alias: {
             '@': '/resources/js',
         },
+    },
+
+    build: {
+        outDir: 'build',
+        emptyOutDir: true,
     },
 });
