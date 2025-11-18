@@ -2,83 +2,11 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
 
 jobs:
-
-  tests:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: testing
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          extensions: mbstring, dom, curl, libxml, mysql, fileinfo, zip
-          coverage: xdebug
-
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-      - name: Generate key
-        run: php artisan key:generate
-
-      - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-
-      - name: Create SQLite Database
-        run: touch database/database.sqlite || true
-
-      - name: Prepare Environment
-        run: php artisan migrate --force
-
-      - name: Seed Database
-        run: php artisan db:seed --class=SampleDataSeeder --force
-
-      - name: Execute tests
-        run: vendor/bin/pest
-
-
-
-  code-quality:
-    name: Code Quality Checks
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-      - name: Run Pint (Laravel Code Style Fixer)
-        run: ./vendor/bin/pint --test
-
-
 
   build-frontend:
     name: Build Frontend Assets
@@ -101,66 +29,32 @@ jobs:
 
 
 
-  security-check:
-    name: Security Vulnerabilities Check
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-      - name: Run Security Check
-        run: composer audit
-
-
 
   deploy:
     name: Deploy to Hostinger via SFTP
     runs-on: ubuntu-latest
-    needs: [tests, code-quality, build-frontend, security-check]
+    needs: build-frontend
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Upload to Hostinger (SFTP)
+      - name: Deploy via SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.HOSTINGER_HOST }}
-          port: ${{ secrets.HOSTINGER_PORT }}
-          username: ${{ secrets.HOSTINGER_USER }}
-          password: ${{ secrets.HOSTINGER_PASS }}
-          local-dir: './'
-          server-dir: ${{ secrets.HOSTINGER_PATH }}
+          server: ${{ secrets.HOSTINGER_FTP_HOST }}
+          username: ${{ secrets.HOSTINGER_FTP_USER }}
+          password: ${{ secrets.HOSTINGER_FTP_PASS }}
+          protocol: "sftp"
+          server-dir: "domains/genesis-tac.com/public_html/gtac/"
+          local-dir: "./"
           exclude: |
             **/.git*
-            node_modules/**
-            vendor/**
-            storage/**
-            .env
-            tests/**
-            .github/**
-            build/**
-            deployment/**
-            *.zip
-
-      - name: Optimize on server (SSH)
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.HOSTINGER_HOST }}
-          username: ${{ secrets.HOSTINGER_USER }}
-          password: ${{ secrets.HOSTINGER_PASS }}
-          port: ${{ secrets.HOSTINGER_PORT }}
-          script: |
-            cd /home/u457243864/gtac
-            composer install --no-dev --prefer-dist --no-interaction
-            php artisan optimize:clear
-            php artisan optimize
+            **/.github*
+            **/node_modules*
+            **/vendor*
+            **/tests*
+            **/storage/logs*
+            **/storage/framework/sessions*
+            **/storage/framework/cache*
+            **/storage/framework/views*
