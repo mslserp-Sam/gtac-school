@@ -42,7 +42,7 @@ class CourseController extends Controller
             $file = $request->file('image_file');
             $filename = 'course_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
-            $validated['image_path'] = '/images/' . $filename;
+            $validated['image_path'] = '/storage/images/' . $filename;
         }
 
         // Remove image_file from validated array as it's not a database field
@@ -84,7 +84,7 @@ class CourseController extends Controller
             $file = $request->file('image_file');
             $filename = 'course_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
-            $validated['image_path'] = '/images/' . $filename;
+            $validated['image_path'] = '/storage/images/' . $filename;
         }
 
         // Remove image_file from validated array as it's not a database field
