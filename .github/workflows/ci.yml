@@ -35,18 +35,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Upload only the built assets folder (adjust local_path if your build output differs)
-      - name: Deploy public/build via SFTP
+      - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.HOSTINGER_HOST }}
           port: ${{ secrets.HOSTINGER_PORT }}
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
-          # This sends only the build artifacts (the folder your logs showed: public/build)
-          local_path: "./public/build"
-          # We append "public/build/" to your HOSTINGER_PATH (which you said is "public_html/gtac/")
-          # Make sure HOSTINGER_PATH ends with a trailing slash in your secret (e.g. "public_html/gtac/")
-          remote_path: ${{ secrets.HOSTINGER_PATH }}public/build/
-          # optional: don't delete remote files by default; set to 'true' if you want purge behavior
-          delete_remote_files: 'false'
+
+          # Upload ONLY the folder that actually exists
+          local_path: "./public/build/assets"
+
+          # Upload into public_html/gtac/public/build/assets/
+          remote_path: ${{ secrets.HOSTINGER_PATH }}public/build/assets/
+
+          delete_remote_files: false
+          sftp_only: false
