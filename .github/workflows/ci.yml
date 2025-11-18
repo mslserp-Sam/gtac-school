@@ -1,9 +1,7 @@
-name: CI/CD Pipeline
+name: build_and_deploy
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -11,23 +9,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # -----------------------------
+      # CHECKOUT PROJECT
+      # -----------------------------
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # -----------------------------
+      # SETUP NODE
+      # -----------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
+      # -----------------------------
+      # INSTALL DEPENDENCIES
+      # -----------------------------
       - name: Install Dependencies
         run: npm ci
 
-      - name: Create build directory
-        run: mkdir -p public/build
-
+      # -----------------------------
+      # BUILD VITE ASSETS
+      # -----------------------------
       - name: Build Frontend Assets
         run: npm run build
 
+      # -----------------------------
+      # DEPLOY BUILD FOLDER VIA SFTP
+      # -----------------------------
       - name: Deploy build assets to Hostinger via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
@@ -36,8 +46,11 @@ jobs:
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
 
-          local_path: "public/build"
-          remote_path: "${{ secrets.HOSTINGER_PATH }}public/build/"
+          # upload only the build folder
+          local_path: "./public/build"
 
-          delete_remote_files: false
-          sftp_only: false
+          # deploy into: public_html/gtac/public/build
+          remote_path: "${{ secrets.HOSTINGER_PATH }}/public/build"
+
+          # clear old assets to avoid outdated JS
+          delete_remote_files: true
