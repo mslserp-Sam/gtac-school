@@ -26,6 +26,7 @@ jobs:
       - name: Build Assets
         run: npm run build
 
+
   deploy:
     name: Deploy to Hostinger via SFTP
     runs-on: ubuntu-latest
@@ -42,6 +43,12 @@ jobs:
           port: ${{ secrets.HOSTINGER_PORT }}
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
+
+          # Upload the whole Laravel project
           local_path: "./"
+
+          # Upload INTO your Laravel project on Hostinger
           remote_path: ${{ secrets.HOSTINGER_PATH }}
+
+          # Use your custom ignore file
           sftp_ignore_file: ".sftpignore"
