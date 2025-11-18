@@ -7,8 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-frontend:
-    name: Build Frontend Assets
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,27 +17,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-
-      - name: Create build directory
-        run: mkdir -p public/build
+          node-version: "20"
 
       - name: Install Dependencies
         run: npm ci
 
-      - name: Build Assets
+      - name: Create build directory
+        run: mkdir -p public/build
+
+      - name: Build Frontend Assets
         run: npm run build
 
-  deploy:
-    name: Deploy build to Hostinger (SFTP)
-    runs-on: ubuntu-latest
-    needs: build-frontend
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy build assets via SFTP
+      - name: Deploy build assets to Hostinger via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.HOSTINGER_HOST }}
