@@ -3,40 +3,46 @@ name: build_and_deploy
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Build Frontend
-      run: npm run build
+      - name: Build Frontend Assets
+        run: npm run build
 
-    - name: Deploy build assets via SFTP
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-      with:
-        server: ${{ secrets.HOSTINGER_HOST }}
-        port: ${{ secrets.HOSTINGER_PORT }}
-        username: ${{ secrets.HOSTINGER_USER }}
-        password: ${{ secrets.HOSTINGER_PASS }}
+      # Create a clean build folder to upload only what’s needed
+      - name: Prepare build folder
+        run: |
+          mkdir -p public/build
+          cp -r build/assets public/build/assets
+          cp -r build/manifest.json public/build/
 
-        # 👇 THIS IS THE CORRECT LOCAL BUILD FOLDER
-        local_path: "./public/build"
+      - name: Deploy build assets via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server: ${{ secrets.HOSTINGER_HOST }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASS }}
 
-        # 👇 THIS IS THE CORRECT HOSTINGER TARGET
-        remote_path: "public_html/gtac/public/build"
+          # Upload only frontend build
+          local_path: "public/build"
 
-        delete_remote_files: false
-        sftp_only: false
+          # This becomes: public_html/gtac/public/build
+          remote_path: ${{ secrets.HOSTINGER_PATH }}/build
+
+          sftp_only: false
+          delete_remote_files: false
