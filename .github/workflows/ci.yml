@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Create build directory
+        run: mkdir -p public/build
+
       - name: Install Dependencies
         run: npm ci
 
@@ -43,10 +46,7 @@ jobs:
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
 
-          # Upload ONLY the build folder
           local_path: "public/build"
-
-          # Upload INTO Laravel public/build on Hostinger
           remote_path: "${{ secrets.HOSTINGER_PATH }}public/build/"
 
           delete_remote_files: false
