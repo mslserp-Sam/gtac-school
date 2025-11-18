@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
@@ -23,18 +23,15 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
-      - name: Prepare build folder
-        run: |
-          mkdir -p public/build
-          cp -r build/assets public/build/assets
-          cp build/manifest.json public/build/
-
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.HOSTINGER_SERVER }}
-          port: ${{ secrets.HOSTINGER_PORT }}
-          username: ${{ secrets.HOSTINGER_USERNAME }}
-          password: ${{ secrets.HOSTINGER_PASSWORD }}
-          local_path: "public/build"
-          remote_path: "${{ secrets.HOSTINGER_PATH }}/build"
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          port: ${{ secrets.HOSTINGER_FTP_PORT }}
+          username: ${{ secrets.HOSTINGER_FTP_USER }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+
+          local_path: public/build
+          remote_path: /public_html/gtac/public/build
+
+          delete_remote_files: true
