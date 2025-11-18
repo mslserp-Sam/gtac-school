@@ -26,9 +26,8 @@ jobs:
       - name: Build Assets
         run: npm run build
 
-
   deploy:
-    name: Deploy to Hostinger via SFTP
+    name: Deploy build to Hostinger (SFTP)
     runs-on: ubuntu-latest
     needs: build-frontend
 
@@ -36,19 +35,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy project via SFTP
+      # Upload only the built assets folder (adjust local_path if your build output differs)
+      - name: Deploy public/build via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.HOSTINGER_HOST }}
           port: ${{ secrets.HOSTINGER_PORT }}
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
-
-          # Upload source folder
-          local_path: "./"
-
-          # Upload into your Hostinger Laravel directory
-          remote_path: ${{ secrets.HOSTINGER_PATH }}
-
-          # Ignore unnecessary files — this file must exist in your repo root
-          sftp_ignore_file: ".sftpignore"
+          # This sends only the build artifacts (the folder your logs showed: public/build)
+          local_path: "./public/build"
+          # We append "public/build/" to your HOSTINGER_PATH (which you said is "public_html/gtac/")
+          # Make sure HOSTINGER_PATH ends with a trailing slash in your secret (e.g. "public_html/gtac/")
+          remote_path: ${{ secrets.HOSTINGER_PATH }}public/build/
+          # optional: don't delete remote files by default; set to 'true' if you want purge behavior
+          delete_remote_files: 'false'
