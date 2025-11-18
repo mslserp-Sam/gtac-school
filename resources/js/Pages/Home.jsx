@@ -488,7 +488,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
             </section>
 
             {/* Contact Section */}
-            <section id="contact" className="py-24 bg-gtac-50 to-white">
+            <section id="contact" className="py-24 bg-gtac-50 to-white test">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16 scroll-reveal">
                         <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Contact Us</h2>
