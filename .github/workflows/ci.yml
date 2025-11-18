@@ -28,7 +28,6 @@ jobs:
           mkdir -p public/build
           cp -r build/assets public/build/assets
           cp build/manifest.json public/build/
-          cp build/index.html public/build/
 
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
