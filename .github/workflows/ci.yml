@@ -36,7 +36,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy via SFTP
+      - name: Deploy project via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.HOSTINGER_HOST }}
@@ -44,11 +44,11 @@ jobs:
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
 
-          # Upload the whole Laravel project
+          # Upload source folder
           local_path: "./"
 
-          # Upload INTO your Laravel project on Hostinger
+          # Upload into your Hostinger Laravel directory
           remote_path: ${{ secrets.HOSTINGER_PATH }}
 
-          # Use your custom ignore file
+          # Ignore unnecessary files — this file must exist in your repo root
           sftp_ignore_file: ".sftpignore"
