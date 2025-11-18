@@ -38,7 +38,6 @@ jobs:
       - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          protocol: ftps
           server: ${{ secrets.HOSTINGER_HOST }}
           port: ${{ secrets.HOSTINGER_PORT }}
           username: ${{ secrets.HOSTINGER_USER }}
@@ -46,12 +45,12 @@ jobs:
           local_path: "./"
           remote_path: ${{ secrets.HOSTINGER_PATH }}
           exclude: |
-            **/.git*
-            **/.github*
-            **/node_modules*
-            **/vendor*
-            **/tests*
-            **/storage/logs*
-            **/storage/framework/sessions*
-            **/storage/framework/cache*
-            **/storage/framework/views*
+            - .git*
+            - .github*
+            - node_modules*
+            - vendor*
+            - tests*
+            - storage/logs*
+            - storage/framework/sessions*
+            - storage/framework/cache*
+            - storage/framework/views*
