@@ -101,7 +101,7 @@ export default function MainLayout({ children }) {
                                         : 'bg-white/90 backdrop-blur-sm'
                                 }`}>
                                     <img 
-                                        src="/images/gtacLogo.png" 
+                                        src="/storage/images/gtacLogo.png" 
                                         alt="GTAC School Logo" 
                                         className="h-12 w-auto"
                                     />
@@ -190,7 +190,7 @@ export default function MainLayout({ children }) {
                             <div className="flex items-center justify-start gap-4 mb-4">
                                 <div className="flex-shrink-0 bg-white/70 rounded-full p-1">
                                     <img 
-                                        src="/images/gtacLogo.png" 
+                                        src="/storage/images/gtacLogo.png" 
                                         alt="GTAC Logo" 
                                         className="h-10 md:h-17 w-auto"
                                     />

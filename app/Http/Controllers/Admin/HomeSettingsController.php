@@ -18,7 +18,7 @@ class HomeSettingsController extends Controller
             // Hero Section
             'hero_title' => 'GENESIS',
             'hero_subtitle' => 'Training & Assessment Center Inc.',
-            'hero_background_image' => '/images/homeBg.jpg',
+            'hero_background_image' => '/storage/images/homeBg.jpg',
             'hero_button_1_text' => 'Explore Courses',
             'hero_button_1_link' => '#courses',
             'hero_button_2_text' => 'Get In Touch',
