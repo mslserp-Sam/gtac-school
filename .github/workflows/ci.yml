@@ -23,13 +23,7 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
-      - name: Prepare build folder
-        run: |
-          rm -rf public/build
-          mkdir -p public/build
-          cp -r build/assets public/build/assets
-          cp build/manifest.json public/build/manifest.json
-
+      # Deploy ONLY the correct build folder
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
@@ -38,11 +32,11 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASS }}
           port: ${{ secrets.HOSTINGER_PORT }}
 
-          # LOCAL
+          # LOCAL build path (CORRECT)
           local_path: public/build
 
-          # REMOTE (NO LEADING SLASH)
-          remote_path: public_html/gtac/public/build
+          # REMOTE path (CORRECT, don't change)
+          remote_path: /public_html/gtac/public/build
 
           sftp_only: true
           delete_remote_files: false
