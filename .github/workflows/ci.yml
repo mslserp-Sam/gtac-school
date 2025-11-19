@@ -9,53 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code (runs on GitHub runner)
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js (runs on GitHub runner)
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies (runs on GitHub runner)
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build Frontend Assets (runs on GitHub runner)
+      - name: Build Frontend Assets
         run: npm run build
 
-      - name: Inspect build output (debug; runs on GitHub runner)
+      - name: Prepare build folder
         run: |
-          echo "pwd: $(pwd)"
-          echo "ls -la (repo root):"
-          ls -la
-          echo "ls -la build (vite's build folder):"
-          ls -la build || true
-          echo "ls -la public/build (what we'll upload):"
-          ls -la public/build || true
-
-      # Prepare build folder inside repository (runs on GitHub runner)
-      - name: Prepare public/build for deploy (runs on GitHub runner)
-        run: |
-          rm -rf public/build || true
           mkdir -p public/build
-          # copy only the Vite build artifacts we need (assets + manifest)
-          # If your Vite output is in `build/` (root), copy from there to public/build
           cp -r build/assets public/build/assets
-          cp build/manifest.json public/build/manifest.json || true
-          # list files we will upload
-          echo "Prepared public/build:"
-          ls -la public/build
-          find public/build -maxdepth 2 -type f -print || true
+          cp build/manifest.json public/build/manifest.json
 
-      - name: Debug HOSTINGER secrets (non-sensitive print; runs on GitHub runner)
-        run: |
-          echo "HOST: ${{ secrets.HOSTINGER_HOST && 'SET' || 'MISSING' }}"
-          echo "USER: ${{ secrets.HOSTINGER_USER && 'SET' || 'MISSING' }}"
-          echo "PORT: ${{ secrets.HOSTINGER_PORT && 'SET' || 'MISSING' }}"
-          # do NOT print secret values themselves
-
-      # Deploy to Hostinger via SFTP (runs on GitHub runner, then connects to remote via SFTP)
-      - name: Deploy build assets via SFTP (runs on GitHub runner -> SFTP to Hostinger)
+      - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.HOSTINGER_HOST }}
@@ -63,14 +37,9 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASS }}
           port: ${{ secrets.HOSTINGER_PORT }}
 
-          # LOCAL folder inside the repo on the GitHub runner (must exist here)
-          local_path: build
-
-          # REMOTE folder on Hostinger (no leading slash often safer; adjust if your host expects leading slash)
-          # This must point to your website's public dir. Use either:
-          # public_html/gtac/public/build  OR  /home/USERNAME/public_html/gtac/public/build
-          # If your server uses a domain-specific root, use the path that ls -l on Hostinger shows.
-          remote_path: public_html/gtac/public/build
+          # THIS IS THE MOST IMPORTANT FIX:
+          local_path: public/build
+          remote_path: /public_html/gtac/public/build
 
           sftp_only: true
-          delete_remote_files: false
+          delete_remote_files: true
