@@ -23,14 +23,6 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
-      - name: Prepare build folder
-        run: |
-          mkdir -p public/build
-          cp -r build/assets public/build/assets
-          cp build/index.html public/build/index.html
-          cp build/manifest.json public/build/manifest.json
-
-      # 🔍 DEBUG: SHOW PORT VALUE FROM SECRETS
       - name: Debug HOSTINGER_PORT
         run: echo "PORT IS -> ${{ secrets.HOSTINGER_PORT }}"
 
