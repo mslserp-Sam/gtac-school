@@ -23,14 +23,13 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
-      # Prepare build folder
       - name: Prepare build folder
         run: |
+          rm -rf public/build
           mkdir -p public/build
           cp -r build/assets public/build/assets
           cp build/manifest.json public/build/manifest.json
 
-      # Deploy to Hostinger
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
@@ -39,10 +38,7 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASS }}
           port: ${{ secrets.HOSTINGER_PORT }}
 
-          # LOCAL PATH — this was the problem before
           local_path: public/build
-
-          # REMOTE TARGET (correct location)
           remote_path: /public_html/gtac/public/build
 
           sftp_only: true
