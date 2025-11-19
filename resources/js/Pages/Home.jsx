@@ -65,7 +65,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
     return (
         <MainLayout>
             {/* Hero Section */}
-            <section id="home" className="relative min-h-screen flex items-center justify-center text-white overflow-hidden parallax-section" style={{ backgroundImage: `url(${settings.hero_background_image || '/storage/images/homeBg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+            <section id="home" className="relative min-h-screen flex items-center justify-center text-white overflow-hidden parallax-section" style={{ backgroundImage: `url(${settings.hero_background_image || '/storage/images/homeBg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat' }}>
                 {/* Dark overlay with gradient */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70"></div>
                 

@@ -104,10 +104,16 @@ nav.sticky {
 /* Parallax scroll effect */
 .parallax-section {
     position: relative;
-    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* Fixed attachment only on desktop, not mobile */
+@media (min-width: 768px) {
+    .parallax-section {
+        background-attachment: fixed;
+    }
 }
 
 /* Parallax elements */

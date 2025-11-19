@@ -88,7 +88,7 @@ export default function MainLayout({ children }) {
             <nav className={`fixed top-0 left-0 right-0 transition-all duration-300 z-50 ${
                 isScrolled 
                     ? 'bg-gtac-600 shadow-lg' 
-                    : 'bg-transparent'
+                    : 'bg-transparent backdrop-blur-sm'
             }`}>
                 <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
@@ -138,14 +138,15 @@ export default function MainLayout({ children }) {
                                 className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-200 ${
                                     isScrolled 
                                         ? 'text-white hover:text-gtac-200' 
-                                        : 'text-white hover:text-gtac-200'
+                                        : 'text-white hover:text-gtac-200 drop-shadow-lg'
                                 }`}
+                                aria-label="Toggle menu"
                             >
-                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                     {isMenuOpen ? (
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     ) : (
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                                     )}
                                 </svg>
                             </button>
@@ -155,7 +156,7 @@ export default function MainLayout({ children }) {
 
                 {/* Mobile menu */}
                 {isMenuOpen && (
-                        <div className="sm:hidden">
+                    <div className="sm:hidden bg-gtac-600 shadow-lg">
                         <div className="pt-2 pb-3 space-y-1">
                             {navigation.map((item) => (
                                 <a
@@ -169,7 +170,7 @@ export default function MainLayout({ children }) {
                                             setIsMenuOpen(false);
                                         }
                                     }}
-                                    className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer"
+                                    className="border-transparent text-white hover:bg-gtac-700 hover:border-gtac-400 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer transition-colors"
                                 >
                                     {item.name}
                                 </a>
