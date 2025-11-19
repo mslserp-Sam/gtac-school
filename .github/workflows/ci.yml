@@ -39,7 +39,7 @@ jobs:
 
           # THIS IS THE MOST IMPORTANT FIX:
           local_path: public/build
-          remote_path: /public_html/gtac/public/build
+          remote_path: /home/u457243864/public_html/gtac/public/build
 
           sftp_only: true
           delete_remote_files: true
