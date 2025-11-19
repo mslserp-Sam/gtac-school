@@ -86,7 +86,7 @@ export default function MainLayout({ children }) {
         <div className="min-h-screen bg-gray-50">
             {/* Navigation */}
             <nav className={`fixed top-0 left-0 right-0 transition-all duration-300 z-50 ${
-                isScrolled 
+                isScrolled || isMenuOpen
                     ? 'bg-gtac-600 shadow-lg' 
                     : 'bg-transparent backdrop-blur-sm'
             }`}>
