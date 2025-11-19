@@ -23,11 +23,11 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
+      # ✅ ONLY COPY ASSETS + MANIFEST (NO index.html)
       - name: Prepare build folder
         run: |
           mkdir -p public/build
           cp -r build/assets public/build/assets
-          cp build/index.html public/build/index.html
           cp build/manifest.json public/build/manifest.json
 
       - name: Deploy build assets via SFTP
@@ -36,7 +36,7 @@ jobs:
           server: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
-          port: ${{ secrets.HOSTINGER_PORT }}   # MUST BE 65002 !!!
+          port: ${{ secrets.HOSTINGER_PORT }}  
           local_path: public/build
           remote_path: /public_html/gtac/public/build
           sftp_only: true
