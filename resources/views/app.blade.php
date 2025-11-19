@@ -5,7 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title inertia>GTAC</title>
+        <!-- Open Graph Meta for Social Sharing -->
+        <meta property="og:title" content="GTAC – Genesis Training & Assessment Center">
+        <meta property="og:description" content="TESDA-accredited training and assessment center. Explore our courses!">
+        <meta property="og:image" content="https://genesis-tac.com/storage/images/gtacLogo.jpg">
+        <meta property="og:url" content="https://genesis-tac.com">
+        <meta property="og:type" content="website">
 
+        <!-- Twitter Card (optional but good) -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="GTAC – Genesis Training & Assessment Center">
+        <meta name="twitter:description" content="TESDA-accredited training and assessment center.">
+        <meta name="twitter:image" content="https://genesis-tac.com/storage/images/gtacLogo.jpg">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
