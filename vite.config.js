@@ -5,12 +5,10 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.jsx',
+            input: ['resources/js/app.jsx'],
             refresh: true,
         }),
-        react({
-            include: 'resources/js/**/*.{jsx,tsx}',
-        }),
+        react(),
     ],
 
     resolve: {
@@ -20,7 +18,7 @@ export default defineConfig({
     },
 
     build: {
-        outDir: 'build',
+        outDir: 'build',   // <--- THIS MAKES VITE CREATE build/assets
         emptyOutDir: true,
     },
 });

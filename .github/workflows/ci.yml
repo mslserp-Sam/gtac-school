@@ -23,7 +23,6 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
-      # ✅ ONLY COPY ASSETS + MANIFEST (NO index.html)
       - name: Prepare build folder
         run: |
           mkdir -p public/build
@@ -36,7 +35,7 @@ jobs:
           server: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
-          port: ${{ secrets.HOSTINGER_PORT }}  
+          port: ${{ secrets.HOSTINGER_PORT }}
           local_path: public/build
           remote_path: /public_html/gtac/public/build
           sftp_only: true
