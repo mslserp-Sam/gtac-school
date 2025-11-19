@@ -93,7 +93,7 @@ export default function MainLayout({ children }) {
                 <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo - Left */}
-                        <div className="flex-shrink-0">
+                        <div className="flex-shrink-0 testing-samuel-belen">
                             <Link href="/">
                                 <div className={`px-3 pb-2 pt-5 rounded-b-lg transition-all duration-300 ${
                                     isScrolled 
