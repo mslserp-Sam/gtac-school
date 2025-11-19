@@ -30,7 +30,7 @@ jobs:
           cp -r build/assets public/build/assets
           cp build/manifest.json public/build/manifest.json
 
-      # Deploy to REAL server path
+      # Deploy to Hostinger
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
@@ -38,7 +38,12 @@ jobs:
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
           port: ${{ secrets.HOSTINGER_PORT }}
+
+          # LOCAL PATH — this was the problem before
           local_path: public/build
-          remote_path: /home/u457243864/gtac/public/build
+
+          # REMOTE TARGET (correct location)
+          remote_path: /public_html/gtac/public/build
+
           sftp_only: true
           delete_remote_files: false
