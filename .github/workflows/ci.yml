@@ -23,17 +23,13 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
-      - name: Debug HOSTINGER_PORT
-        run: echo "PORT IS -> ${{ secrets.HOSTINGER_PORT }}"
-
-      - name: Deploy build assets via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.HOSTINGER_HOST }}
-          port: ${{ secrets.HOSTINGER_PORT }}
           username: ${{ secrets.HOSTINGER_USER }}
           password: ${{ secrets.HOSTINGER_PASS }}
-          local_path: public/build
-          remote_path: ${{ secrets.HOSTINGER_PATH }}/build
-          delete_remote_files: true
-          sftp_only: true
+          protocol: ftp
+          local-dir: public/build
+          server-dir: /public_html/gtac/public/build
+          log-level: verbose
