@@ -27,6 +27,7 @@ jobs:
         run: |
           mkdir -p public/build
           cp -r build/assets public/build/assets
+          cp build/index.html public/build/index.html
           cp build/manifest.json public/build/manifest.json
 
       - name: Deploy build assets via SFTP
@@ -37,6 +38,6 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASS }}
           port: ${{ secrets.HOSTINGER_PORT }}
           local_path: public/build
-          remote_path: /public_html/gtac/public/build
+          remote_path: gtac/public/build   # <--- THE CORRECT ONE
           sftp_only: true
           delete_remote_files: false
