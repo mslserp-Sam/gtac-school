@@ -6,19 +6,14 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/js/app.jsx'],
+            publicDirectory: 'public',
+            buildDirectory: 'build',
             refresh: true,
         }),
         react(),
     ],
-
-    resolve: {
-        alias: {
-            '@': '/resources/js',
-        },
-    },
-
     build: {
-        outDir: 'build',   // <--- THIS MAKES VITE CREATE build/assets
+        outDir: 'build',
         emptyOutDir: true,
-    },
+    }
 });
