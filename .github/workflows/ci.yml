@@ -1,45 +1,16 @@
-name: build_and_deploy
+- name: Deploy build assets via SFTP
+  uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+  with:
+    server: ${{ secrets.HOSTINGER_HOST }}
+    username: ${{ secrets.HOSTINGER_USER }}
+    password: ${{ secrets.HOSTINGER_PASS }}
+    port: ${{ secrets.HOSTINGER_PORT }}
 
-on:
-  push:
-    branches: [ main ]
+    # LOCAL
+    local_path: public/build
 
-jobs:
-  build_and_deploy:
-    runs-on: ubuntu-latest
+    # REMOTE (NO LEADING SLASH)
+    remote_path: public_html/gtac/public/build
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Frontend Assets
-        run: npm run build
-
-      - name: Prepare build folder
-        run: |
-          rm -rf public/build
-          mkdir -p public/build
-          cp -r build/assets public/build/assets
-          cp build/manifest.json public/build/manifest.json
-
-      - name: Deploy build assets via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          server: ${{ secrets.HOSTINGER_HOST }}
-          username: ${{ secrets.HOSTINGER_USER }}
-          password: ${{ secrets.HOSTINGER_PASS }}
-          port: ${{ secrets.HOSTINGER_PORT }}
-
-          local_path: public/build
-          remote_path: /public_html/gtac/public/build
-
-          sftp_only: true
-          delete_remote_files: false
+    sftp_only: true
+    delete_remote_files: false
