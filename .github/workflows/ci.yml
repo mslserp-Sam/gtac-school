@@ -2,43 +2,56 @@ name: build_and_deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up job
+        run: echo "Starting CI/CD..."
+
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build frontend assets
+      - name: Build Frontend Assets
         run: npm run build
 
+      # 🔥 COPY VITE BUILD INTO LARAVEL PUBLIC/build
       - name: Prepare build folder
         run: |
           mkdir -p public/build
           cp -r build/assets public/build/assets
+          cp build/index.html public/build/index.html
+          cp build/manifest.json public/build/manifest.json
 
-      - name: Debug HOSTINGER_PATH
-        run: echo "Deploying to: ${{ secrets.HOSTINGER_PATH }}"
+      # 🔥 DEBUG PORT (because Hostinger SSH = PORT 65002)
+      - name: Debug HOSTINGER_PORT
+        run: echo "Using PORT: ${{ secrets.HOSTINGER_PORT }}"
 
+      # 🔥 DEPLOY TO HOSTINGER
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.HOSTINGER_HOST }}
+          server: ${{ secrets.HOSTINGER_FTP_HOST }}
           port: ${{ secrets.HOSTINGER_PORT }}
-          username: ${{ secrets.HOSTINGER_USERNAME }}
-          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+
+          # Local folder (your Laravel public folder build)
           local_path: public/build
-          remote_path: /${{ secrets.HOSTINGER_PATH }}/public/build
-          delete_remote_files: true
+
+          # Remote folder (Hostinger target)
+          remote_path: /public_html/gtac/public/build
+
+          sftp_only: true
+          delete_remote_files: false
