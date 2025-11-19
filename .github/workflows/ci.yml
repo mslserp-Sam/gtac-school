@@ -2,7 +2,7 @@ name: build_and_deploy
 
 on:
   push:
-    branches: ["main"]
+    branches: [ main ]
 
 jobs:
   build_and_deploy:
@@ -15,23 +15,33 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Frontend Assets
         run: npm run build
 
+      - name: Prepare build folder
+        run: |
+          mkdir -p public/build
+          cp -r build/assets public/build/assets
+          cp build/index.html public/build/index.html
+          cp build/manifest.json public/build/manifest.json
+
+      # 🔍 DEBUG: SHOW PORT VALUE FROM SECRETS
+      - name: Debug HOSTINGER_PORT
+        run: echo "PORT IS -> ${{ secrets.HOSTINGER_PORT }}"
+
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
-          port: ${{ secrets.HOSTINGER_FTP_PORT }}
-          username: ${{ secrets.HOSTINGER_FTP_USER }}
-          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-
+          server: ${{ secrets.HOSTINGER_HOST }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASS }}
           local_path: public/build
-          remote_path: /public_html/gtac/public/build
-
+          remote_path: ${{ secrets.HOSTINGER_PATH }}/build
           delete_remote_files: true
+          sftp_only: true
