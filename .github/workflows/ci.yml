@@ -64,7 +64,7 @@ jobs:
           port: ${{ secrets.HOSTINGER_PORT }}
 
           # LOCAL folder inside the repo on the GitHub runner (must exist here)
-          local_path: public/build
+          local_path: build
 
           # REMOTE folder on Hostinger (no leading slash often safer; adjust if your host expects leading slash)
           # This must point to your website's public dir. Use either:
