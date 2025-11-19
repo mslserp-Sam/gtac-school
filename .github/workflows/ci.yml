@@ -23,11 +23,11 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
 
+      # VITE OUTPUT FIX — Laravel does NOT produce index.html
       - name: Prepare build folder
         run: |
           mkdir -p public/build
           cp -r build/assets public/build/assets
-          cp build/index.html public/build/index.html
           cp build/manifest.json public/build/manifest.json
 
       - name: Deploy build assets via SFTP
@@ -38,6 +38,6 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASS }}
           port: ${{ secrets.HOSTINGER_PORT }}
           local_path: public/build
-          remote_path: gtac/public/build   # <--- THE CORRECT ONE
+          remote_path: gtac/public/build
           sftp_only: true
           delete_remote_files: false
