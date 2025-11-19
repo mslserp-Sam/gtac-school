@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up job
-        run: echo "Starting CI/CD..."
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -21,33 +18,26 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Frontend Assets
         run: npm run build
 
-      # ✅ COPY ONLY ASSETS + MANIFEST (no index.html)
       - name: Prepare build folder
         run: |
           mkdir -p public/build
           cp -r build/assets public/build/assets
+          cp build/index.html public/build/index.html
           cp build/manifest.json public/build/manifest.json
 
-      # Debug
-      - name: Debug HOSTINGER_PORT
-        run: echo "Using PORT: ${{ secrets.HOSTINGER_PORT }}"
-
-      # 🚀 DEPLOY TO HOSTINGER
       - name: Deploy build assets via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.HOSTINGER_FTP_HOST }}
-          port: ${{ secrets.HOSTINGER_PORT }}
-          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
-          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-
+          server: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          password: ${{ secrets.HOSTINGER_PASS }}
+          port: ${{ secrets.HOSTINGER_PORT }}   # MUST BE 65002 !!!
           local_path: public/build
           remote_path: /public_html/gtac/public/build
-
           sftp_only: true
           delete_remote_files: false
