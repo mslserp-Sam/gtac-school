@@ -20,51 +20,33 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#1A1D29' }}>
+        <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F2F3F4' }}>
             <Head title="Admin Login - GTAC" />
 
             <div className="w-full max-w-md">
                 {/* Logo */}
-                <div className="flex justify-center mb-12">
-                    <div className="relative">
-                        <svg
-                            className="w-20 h-20 text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={1.5}
-                                d="M12 14l9-5-9-5-9 5 9 5z"
-                            />
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={1.5}
-                                d="M12 14l6.364-3.682M12 20l4.5-2.5M12 14l-4.5-2.5M12 8.5L5.636 4.864M12 14l6.364 3.682M12 14v6.5M12 8.5V14"
-                            />
-                        </svg>
+                <div className="flex justify-center mb-6">
+                    <div className="relative flex items-center gap-2">
+                        <img src="/storage/images/gtacLogo.png" alt="GTAC Logo" className="w-20 h-20" />| <span className="text-2xl font-bold text-gtac-600">GTAC Admin</span>
                     </div>
                 </div>
 
                 {/* Login Form Card */}
-                <div style={{ backgroundColor: '#252936' }} className="rounded-lg p-8 shadow-xl">
+                <div className="bg-white rounded-lg p-8 shadow-xl">
                     <div className="mb-8">
-                        <h1 className="text-2xl font-bold text-white mb-2">Welcome Back</h1>
-                        <p className="text-gray-400 text-sm">Sign in to your admin account</p>
+                        <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h1>
+                        <p className="text-gray-600 text-sm">Sign in to your admin account</p>
                     </div>
 
                     {status && (
-                        <div className="mb-4 text-sm font-medium text-green-400 bg-green-900/30 border border-green-800 rounded p-3">
+                        <div className="mb-4 text-sm font-medium text-green-700 bg-green-100 border border-green-300 rounded p-3">
                             {status}
                         </div>
                     )}
 
                     <form onSubmit={submit}>
                         <div className="mb-4">
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                                 Email
                             </label>
                             <input
@@ -72,8 +54,7 @@ export default function Login({ status, canResetPassword }) {
                                 type="email"
                                 name="email"
                                 value={data.email}
-                                style={{ backgroundColor: '#1A1D29', borderColor: '#4A5568' }}
-                                className="w-full px-4 py-3 rounded-lg border text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition"
                                 autoComplete="username"
                                 autoFocus
                                 onChange={(e) => setData('email', e.target.value)}
@@ -82,7 +63,7 @@ export default function Login({ status, canResetPassword }) {
                         </div>
 
                         <div className="mb-6">
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                                 Password
                             </label>
                             <input
@@ -90,8 +71,7 @@ export default function Login({ status, canResetPassword }) {
                                 type="password"
                                 name="password"
                                 value={data.password}
-                                style={{ backgroundColor: '#1A1D29', borderColor: '#4A5568' }}
-                                className="w-full px-4 py-3 rounded-lg border text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition"
                                 autoComplete="current-password"
                                 onChange={(e) => setData('password', e.target.value)}
                             />
@@ -105,7 +85,7 @@ export default function Login({ status, canResetPassword }) {
                                     checked={data.remember}
                                     onChange={(e) => setData('remember', e.target.checked)}
                                 />
-                                <span className="ml-2 text-sm text-gray-400">
+                                <span className="ml-2 text-sm text-gray-600">
                                     Remember me
                                 </span>
                             </label>
@@ -115,7 +95,7 @@ export default function Login({ status, canResetPassword }) {
                             {canResetPassword && (
                                 <Link
                                     href="/forgot-password"
-                                    className="text-sm text-gray-400 hover:text-gray-300 transition"
+                                    className="text-sm text-gray-600 hover:text-gtac-600 transition"
                                 >
                                     Forgot your password?
                                 </Link>
@@ -124,17 +104,17 @@ export default function Login({ status, canResetPassword }) {
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="px-6 py-3 rounded-lg font-semibold text-gray-800 bg-gray-300 hover:bg-gray-200 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="px-6 py-3 rounded-lg font-semibold text-white bg-gtac-600 hover:bg-gtac-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {processing ? 'Signing in...' : 'LOG IN'}
                             </button>
                         </div>
                     </form>
 
-                    <div className="mt-6 pt-6 border-t border-gray-700">
+                    <div className="mt-6 pt-6 border-t border-gray-300">
                         <Link
                             href="/"
-                            className="text-sm text-gray-400 hover:text-gray-300 transition text-center block"
+                            className="text-sm text-gray-600 hover:text-gtac-600 transition text-center block"
                         >
                             ← Back to website
                         </Link>
@@ -142,7 +122,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-8 text-center">
-                    <p className="text-gray-500 text-xs">
+                    <p className="text-gray-600 text-xs">
                         Genesis Training and Assessment Center Inc. © 2025
                     </p>
                 </div>
