@@ -75,18 +75,16 @@ class ContactController extends Controller
         $submitUrl = "https://docs.google.com/forms/d/e/{$formId}/formResponse";
 
         // Map our fields to Google Form entry IDs
-        // IMPORTANT: Update these entry IDs to match your Google Form's actual entry IDs
-        // You can find entry IDs by inspecting the form HTML or viewing page source
-        // Format: 'entry.XXXXXXXXX' => value
+        // Based on Google Form entry IDs from the form submission
         $entryIds = [
-            // Update these entry IDs to match your Google Form
-            // Example: If your form's first field has name="entry.123456789", use 'entry.123456789'
-            env('GOOGLE_FORM_ENTRY_FULL_NAME', 'entry.0') => $data['full_name'] ?? '',
-            env('GOOGLE_FORM_ENTRY_CONTACT', 'entry.1') => $data['contact_number'] ?? '',
-            env('GOOGLE_FORM_ENTRY_ADDRESS', 'entry.2') => $data['exact_address'] ?? '',
-            env('GOOGLE_FORM_ENTRY_EMAIL', 'entry.3') => $data['email'] ?? '',
-            env('GOOGLE_FORM_ENTRY_INDUSTRY', 'entry.4') => $data['working_industry'] ?? '',
-            env('GOOGLE_FORM_ENTRY_CIVIL_STATUS', 'entry.5') => $data['civil_status'] ?? '',
+            'entry.2117318909' => $data['has_driver_license'] ?? '', // Do you have a valid driver's license?
+            'entry.380246004' => $data['interested_course'] ?? '', // Course/Qualification
+            'entry.1059127739' => $data['full_name'] ?? '', // Full Name
+            'entry.458916710' => $data['contact_number'] ?? '', // Contact Number
+            'entry.1532759976' => $data['email'] ?? $data['email_address'] ?? '', // Email
+            'entry.1385080086' => $data['exact_address'] ?? '', // Address
+            'entry.1410028182' => $data['civil_status'] ?? '', // Civil Status
+            'entry.661506845' => $data['working_industry'] ?? '', // Industry
         ];
 
         // Filter out empty entries

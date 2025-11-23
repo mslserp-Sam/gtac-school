@@ -5,11 +5,15 @@ export default function Contact() {
     const { flash } = usePage().props;
 
     const { data, setData, post, processing, errors } = useForm({
-        name: '',
         email: '',
-        phone: '',
-        subject: '',
-        message: '',
+        has_driver_license: '',
+        interested_course: '',
+        full_name: '',
+        contact_number: '',
+        email_address: '',
+        exact_address: '',
+        civil_status: '',
+        working_industry: '',
     });
 
     const submit = (e) => {
@@ -38,23 +42,9 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Contact Form */}
                     <div className="bg-white rounded-lg shadow-lg p-8">
-                        <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
+                        <h2 className="text-2xl font-bold mb-6">Enrollment Inquiry</h2>
                         <form onSubmit={submit}>
-                            <div className="mb-4">
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Name <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    value={data.name}
-                                    onChange={(e) => setData('name', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                                    required
-                                />
-                                {errors.name && <div className="text-red-500 text-sm mt-1">{errors.name}</div>}
-                            </div>
-
+                            {/* Email */}
                             <div className="mb-4">
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                                     Email <span className="text-red-500">*</span>
@@ -64,53 +54,178 @@ export default function Contact() {
                                     id="email"
                                     value={data.email}
                                     onChange={(e) => setData('email', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gtac-500 focus:border-gtac-500"
                                     required
                                 />
                                 {errors.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
                             </div>
 
+                            {/* Driver's License */}
                             <div className="mb-4">
-                                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Phone
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Do you have a valid driver's license? <span className="text-red-500">*</span>
                                 </label>
-                                <input
-                                    type="tel"
-                                    id="phone"
-                                    value={data.phone}
-                                    onChange={(e) => setData('phone', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                                />
-                                {errors.phone && <div className="text-red-500 text-sm mt-1">{errors.phone}</div>}
+                                <div className="flex gap-6">
+                                    <label className="flex items-center">
+                                        <input
+                                            type="radio"
+                                            name="has_driver_license"
+                                            value="yes"
+                                            checked={data.has_driver_license === 'yes'}
+                                            onChange={(e) => setData('has_driver_license', e.target.value)}
+                                            className="mr-2"
+                                            required
+                                        />
+                                        <span className="text-gray-700">Yes</span>
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input
+                                            type="radio"
+                                            name="has_driver_license"
+                                            value="no"
+                                            checked={data.has_driver_license === 'no'}
+                                            onChange={(e) => setData('has_driver_license', e.target.value)}
+                                            className="mr-2"
+                                            required
+                                        />
+                                        <span className="text-gray-700">No</span>
+                                    </label>
+                                </div>
+                                {errors.has_driver_license && <div className="text-red-500 text-sm mt-1">{errors.has_driver_license}</div>}
                             </div>
 
-                            <div className="mb-4">
-                                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Subject
+                            {/* Course Selection */}
+                            <div className="mb-6">
+                                <label htmlFor="interested_course" className="block text-sm font-medium text-gray-700 mb-2">
+                                    What course/qualification are you interested to enrol? Pick one. <span className="text-red-500">*</span>
                                 </label>
-                                <input
-                                    type="text"
-                                    id="subject"
-                                    value={data.subject}
-                                    onChange={(e) => setData('subject', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                                />
-                                {errors.subject && <div className="text-red-500 text-sm mt-1">{errors.subject}</div>}
-                            </div>
-
-                            <div className="mb-4">
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Message <span className="text-red-500">*</span>
-                                </label>
-                                <textarea
-                                    id="message"
-                                    rows="5"
-                                    value={data.message}
-                                    onChange={(e) => setData('message', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                <select
+                                    id="interested_course"
+                                    value={data.interested_course}
+                                    onChange={(e) => setData('interested_course', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gtac-500 focus:border-gtac-500"
                                     required
-                                />
-                                {errors.message && <div className="text-red-500 text-sm mt-1">{errors.message}</div>}
+                                >
+                                    <option value="">Select a course</option>
+                                    <option value="Caregiving-Elderly NCII">Caregiving-Elderly NCII</option>
+                                    <option value="HEO-Forklift NCII">HEO-Forklift NCII</option>
+                                    <option value="Computer Systems Servicing NCII">Computer Systems Servicing NCII</option>
+                                    <option value="Content Creation">Content Creation</option>
+                                    <option value="Bread and Pastry Production NCII">Bread and Pastry Production NCII</option>
+                                </select>
+                                {errors.interested_course && <div className="text-red-500 text-sm mt-1">{errors.interested_course}</div>}
+                            </div>
+
+                            {/* Personal Information Section */}
+                            <div className="border-t border-gray-300 pt-6 mt-6">
+                                <h3 className="text-xl font-bold mb-4 text-gtac-700">Personal Information</h3>
+
+                                {/* Full Name */}
+                                <div className="mb-4">
+                                    <label htmlFor="full_name" className="block text-sm font-medium text-gray-700 mb-2">
+                                        FULL NAME (Name, Middle Name, Surname) <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="full_name"
+                                        value={data.full_name}
+                                        onChange={(e) => setData('full_name', e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gtac-500 focus:border-gtac-500"
+                                        placeholder="First Middle Last Name"
+                                        required
+                                    />
+                                    {errors.full_name && <div className="text-red-500 text-sm mt-1">{errors.full_name}</div>}
+                                </div>
+
+                                {/* Contact Number */}
+                                <div className="mb-4">
+                                    <label htmlFor="contact_number" className="block text-sm font-medium text-gray-700 mb-2">
+                                        CONTACT NO. <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        id="contact_number"
+                                        value={data.contact_number}
+                                        onChange={(e) => setData('contact_number', e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gtac-500 focus:border-gtac-500"
+                                        placeholder="09XX-XXX-XXXX"
+                                        required
+                                    />
+                                    {errors.contact_number && <div className="text-red-500 text-sm mt-1">{errors.contact_number}</div>}
+                                </div>
+
+                                {/* Email Address */}
+                                <div className="mb-4">
+                                    <label htmlFor="email_address" className="block text-sm font-medium text-gray-700 mb-2">
+                                        EMAIL ADDRESS <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="email_address"
+                                        value={data.email_address}
+                                        onChange={(e) => setData('email_address', e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gtac-500 focus:border-gtac-500"
+                                        placeholder="your.email@example.com"
+                                        required
+                                    />
+                                    {errors.email_address && <div className="text-red-500 text-sm mt-1">{errors.email_address}</div>}
+                                </div>
+
+                                {/* Exact Address */}
+                                <div className="mb-4">
+                                    <label htmlFor="exact_address" className="block text-sm font-medium text-gray-700 mb-2">
+                                        EXACT ADDRESS <span className="text-red-500">*</span>
+                                    </label>
+                                    <textarea
+                                        id="exact_address"
+                                        rows="3"
+                                        value={data.exact_address}
+                                        onChange={(e) => setData('exact_address', e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gtac-500 focus:border-gtac-500 resize-none"
+                                        placeholder="Street, Barangay, City, Province"
+                                        required
+                                    />
+                                    {errors.exact_address && <div className="text-red-500 text-sm mt-1">{errors.exact_address}</div>}
+                                </div>
+
+                                {/* Civil Status */}
+                                <div className="mb-4">
+                                    <label htmlFor="civil_status" className="block text-sm font-medium text-gray-700 mb-2">
+                                        CIVIL STATUS <span className="text-red-500">*</span>
+                                    </label>
+                                    <select
+                                        id="civil_status"
+                                        value={data.civil_status}
+                                        onChange={(e) => setData('civil_status', e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gtac-500 focus:border-gtac-500"
+                                        required
+                                    >
+                                        <option value="">Select Civil Status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Widowed">Widowed</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Separated">Separated</option>
+                                    </select>
+                                    {errors.civil_status && <div className="text-red-500 text-sm mt-1">{errors.civil_status}</div>}
+                                </div>
+
+                                {/* Working Industry/Experience */}
+                                <div className="mb-6">
+                                    <label htmlFor="working_industry" className="block text-sm font-medium text-gray-700 mb-2">
+                                        WORKING INDUSTRY/WORKING EXPERIENCE <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="working_industry"
+                                        value={data.working_industry}
+                                        onChange={(e) => setData('working_industry', e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-gtac-500 focus:border-gtac-500"
+                                        placeholder="e.g., IT, Healthcare, Education, etc."
+                                        required
+                                    />
+                                    {errors.working_industry && <div className="text-red-500 text-sm mt-1">{errors.working_industry}</div>}
+                                </div>
                             </div>
 
                             <button
@@ -118,7 +233,7 @@ export default function Contact() {
                                 disabled={processing}
                                 className="w-full bg-gtac-600 text-white py-3 rounded-md font-semibold hover:bg-gtac-700 transition disabled:opacity-50"
                             >
-                                {processing ? 'Sending...' : 'Send Message'}
+                                {processing ? 'Submitting...' : 'Submit Inquiry'}
                             </button>
                         </form>
                     </div>
