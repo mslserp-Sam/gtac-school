@@ -222,7 +222,7 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                         <div>
                             <h3 className="text-lg font-semibold mb-4">{footerSettings?.contact_title || 'Contact'}</h3>
                             {footerSettings?.contact_email && <p className="text-gray-400 mb-2">Email: {footerSettings.contact_email}</p>}
-                            {footerSettings?.contact_phone_1 && <p className="text-gray-400 mb-2">Phone: {footerSettings.contact_phone_1}</p>}
+                            {/* Temporarily hidden: {footerSettings?.contact_phone_1 && <p className="text-gray-400 mb-2">Phone: {footerSettings.contact_phone_1}</p>} */}
                             {footerSettings?.contact_phone_2 && <p className="text-gray-400 mb-2">Mobile: {footerSettings.contact_phone_2}</p>}
                             {footerSettings?.contact_address && <p className="text-gray-400" dangerouslySetInnerHTML={{ __html: `Address: ${footerSettings.contact_address}` }} />}
                         </div>

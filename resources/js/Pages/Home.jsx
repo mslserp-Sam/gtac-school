@@ -730,11 +730,6 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                 </div>
                                 <div>
                                     <h4 className="font-semibold text-gray-700 mb-2">Phone</h4>
-                                    {settings.contact_phone_1 && (
-                                        <a href={`tel:${settings.contact_phone_1.replace(/\D/g, '')}`} className="text-gtac-600 hover:text-gtac-700 block transition-colors">
-                                            {settings.contact_phone_1}
-                                        </a>
-                                    )}
                                     {settings.contact_phone_2 && (
                                         <a href={`tel:${settings.contact_phone_2.replace(/\D/g, '')}`} className="text-gtac-600 hover:text-gtac-700 block transition-colors">
                                             {settings.contact_phone_2}
@@ -808,7 +803,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                     <h4 className="font-semibold text-gray-700 mb-2">Contact Information</h4>
                                     <div className="flex items-center gap-2 justify-between">
                                     <div>
-                                    {settings.contact_phone_1 && <p className="text-gray-600 mb-1">📞 {settings.contact_phone_1}</p>}
+                                    {/* Temporarily hidden: {settings.contact_phone_1 && <p className="text-gray-600 mb-1">📞 {settings.contact_phone_1}</p>} */}
                                     {settings.contact_phone_2 && <p className="text-gray-600 mb-1">📱 {settings.contact_phone_2}</p>}
                                     </div>
                                     <div>
