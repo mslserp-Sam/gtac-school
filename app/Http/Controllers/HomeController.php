@@ -34,6 +34,7 @@ class HomeController extends Controller
             'hero_button_1_link' => HomeSetting::get('hero_button_1_link', '#courses'),
             'hero_button_2_text' => HomeSetting::get('hero_button_2_text', 'Get In Touch'),
             'hero_button_2_link' => HomeSetting::get('hero_button_2_link', '#contact'),
+            'hero_tagline' => HomeSetting::get('hero_tagline', '“Empowering Skills. Building Careers. Transforming Lives.”'),
             'value_g_letter' => HomeSetting::get('value_g_letter', 'G'),
             'value_g_title' => HomeSetting::get('value_g_title', 'Growth'),
             'value_g_description' => HomeSetting::get('value_g_description', 'We are committed to continuous learning and self-improvement to ensure professional and personal development for our trainees and staff.'),

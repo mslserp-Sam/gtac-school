@@ -8,6 +8,7 @@ export default function Edit({ settings }) {
         // Hero Section
         hero_title: settings.hero_title || '',
         hero_subtitle: settings.hero_subtitle || '',
+        hero_tagline: settings.hero_tagline || '“Empowering Skills. Building Careers. Transforming Lives.”',
         hero_background_image: settings.hero_background_image || '',
         hero_button_1_text: settings.hero_button_1_text || '',
         hero_button_1_link: settings.hero_button_1_link || '',
@@ -119,6 +120,17 @@ export default function Edit({ settings }) {
                                 value={data.hero_subtitle}
                                 onChange={(e) => setData('hero_subtitle', e.target.value)}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                            />
+                        </div>
+
+                        <div className="mb-4 md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Hero Tagline</label>
+                            <input
+                                type="text"
+                                value={data.hero_tagline}
+                                onChange={(e) => setData('hero_tagline', e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                                placeholder="“Empowering Skills. Building Careers. Transforming Lives.”"
                             />
                         </div>
 

@@ -23,6 +23,7 @@ class HomeSettingsController extends Controller
             'hero_button_1_link' => '#courses',
             'hero_button_2_text' => 'Get In Touch',
             'hero_button_2_link' => '#contact',
+            'hero_tagline' => '“Empowering Skills. Building Careers. Transforming Lives.”',
             
             // Core Values
             'value_g_letter' => 'G',
@@ -80,6 +81,7 @@ class HomeSettingsController extends Controller
             'hero_button_1_link' => 'nullable|string|max:255',
             'hero_button_2_text' => 'nullable|string|max:255',
             'hero_button_2_link' => 'nullable|string|max:255',
+            'hero_tagline' => 'nullable|string|max:255',
             'value_g_letter' => 'nullable|string|max:1',
             'value_g_title' => 'nullable|string|max:255',
             'value_g_description' => 'nullable|string',

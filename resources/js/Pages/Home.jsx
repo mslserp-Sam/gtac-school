@@ -90,6 +90,11 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <h2 className="text-lg md:text-xl lg:text-2xl font-semibold text-white/95 uppercase font-montserrat tracking-wider">
                                 {settings.hero_subtitle || 'Training & Assessment Center Inc.'}
                             </h2>
+                            { (settings.hero_tagline || '“Empowering Skills. Building Careers. Transforming Lives.”') && (
+                                <p className="mt-0 text-base md:text-lg lg:text-xl text-white/90 italic max-w-3xl mx-auto font-light">
+                                    {settings.hero_tagline || '“Empowering Skills. Building Careers. Transforming Lives.”'}
+                                </p>
+                            )}
                         </div>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up delay-200 mt-8">
                             <a
