@@ -62,6 +62,14 @@ export default function Edit({ settings }) {
         location_latitude: settings.location_latitude || '',
         location_longitude: settings.location_longitude || '',
         location_address: settings.location_address || '',
+        
+        // Footer
+        footer_company_name: settings.footer_company_name || '',
+        footer_company_full_name: settings.footer_company_full_name || '',
+        footer_description: settings.footer_description || '',
+        footer_contact_title: settings.footer_contact_title || '',
+        footer_copyright: settings.footer_copyright || '',
+        
         hero_background_image_file: null,
     });
 
@@ -367,6 +375,68 @@ export default function Edit({ settings }) {
                                 value={data.location_address}
                                 onChange={(e) => setData('location_address', e.target.value)}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Footer */}
+                <div className="bg-white shadow rounded-md p-8">
+                    <h2 className="text-2xl font-bold mb-6">Footer</h2>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Company Name (Short)</label>
+                            <input
+                                type="text"
+                                value={data.footer_company_name}
+                                onChange={(e) => setData('footer_company_name', e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                                placeholder="GTAC"
+                            />
+                        </div>
+
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Company Full Name</label>
+                            <input
+                                type="text"
+                                value={data.footer_company_full_name}
+                                onChange={(e) => setData('footer_company_full_name', e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                                placeholder="Genesis Training and Assessment Center Inc."
+                            />
+                        </div>
+
+                        <div className="mb-4 md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                            <textarea
+                                rows="3"
+                                value={data.footer_description}
+                                onChange={(e) => setData('footer_description', e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                                placeholder="Empowering students through quality education and personalized learning experiences."
+                            />
+                        </div>
+
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Contact Section Title</label>
+                            <input
+                                type="text"
+                                value={data.footer_contact_title}
+                                onChange={(e) => setData('footer_contact_title', e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                                placeholder="Contact"
+                            />
+                        </div>
+
+                        <div className="mb-4 md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Copyright Text</label>
+                            <input
+                                type="text"
+                                value={data.footer_copyright}
+                                onChange={(e) => setData('footer_copyright', e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                                placeholder="© 2025 Genesis Training and Assessment Center Inc. All rights reserved."
                             />
                         </div>
                     </div>

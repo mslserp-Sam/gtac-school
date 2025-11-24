@@ -60,6 +60,13 @@ class HomeSettingsController extends Controller
             'location_latitude' => '14.281292682883482',
             'location_longitude' => '121.39607093283571',
             'location_address' => 'Phase 2, Lynville Subd.<br />Brgy. Bagumbayan, Santa Cruz, Laguna',
+            
+            // Footer
+            'footer_company_name' => 'GTAC',
+            'footer_company_full_name' => 'Genesis Training and Assessment Center Inc.',
+            'footer_description' => 'Empowering students through quality education and personalized learning experiences.',
+            'footer_contact_title' => 'Contact',
+            'footer_copyright' => '© 2025 Genesis Training and Assessment Center Inc. All rights reserved.',
         ];
 
         // Merge defaults with existing settings
@@ -112,6 +119,11 @@ class HomeSettingsController extends Controller
             'location_latitude' => 'nullable|string|max:255',
             'location_longitude' => 'nullable|string|max:255',
             'location_address' => 'nullable|string',
+            'footer_company_name' => 'nullable|string|max:255',
+            'footer_company_full_name' => 'nullable|string|max:255',
+            'footer_description' => 'nullable|string',
+            'footer_contact_title' => 'nullable|string|max:255',
+            'footer_copyright' => 'nullable|string|max:255',
         ]);
 
         // Handle file upload for background image

@@ -66,7 +66,16 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
     };
 
     return (
-        <MainLayout>
+        <MainLayout footerSettings={{
+            company_name: settings.footer_company_name,
+            company_full_name: settings.footer_company_full_name,
+            description: settings.footer_description,
+            copyright: settings.footer_copyright,
+            contact_email: settings.contact_email,
+            contact_phone_1: settings.contact_phone_1,
+            contact_phone_2: settings.contact_phone_2,
+            contact_address: settings.contact_address,
+        }}>
             {/* Hero Section */}
             <section id="home" className="relative min-h-screen flex items-center justify-center text-white overflow-hidden parallax-section" style={{ backgroundImage: `url(${settings.hero_background_image || '/storage/images/homeBg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat' }}>
                 {/* Dark overlay with gradient */}

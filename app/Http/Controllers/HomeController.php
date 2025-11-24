@@ -65,6 +65,11 @@ class HomeController extends Controller
             'location_latitude' => HomeSetting::get('location_latitude', env('SCHOOL_LATITUDE', '14.281292682883482')),
             'location_longitude' => HomeSetting::get('location_longitude', env('SCHOOL_LONGITUDE', '121.39607093283571')),
             'location_address' => HomeSetting::get('location_address', 'Phase 2, Lynville Subd.<br />Brgy. Bagumbayan, Santa Cruz, Laguna'),
+            'footer_company_name' => HomeSetting::get('footer_company_name', 'GTAC'),
+            'footer_company_full_name' => HomeSetting::get('footer_company_full_name', 'Genesis Training and Assessment Center Inc.'),
+            'footer_description' => HomeSetting::get('footer_description', 'Empowering students through quality education and personalized learning experiences.'),
+            'footer_contact_title' => HomeSetting::get('footer_contact_title', 'Contact'),
+            'footer_copyright' => HomeSetting::get('footer_copyright', '© 2025 Genesis Training and Assessment Center Inc. All rights reserved.'),
         ];
 
         return Inertia::render('Home', [

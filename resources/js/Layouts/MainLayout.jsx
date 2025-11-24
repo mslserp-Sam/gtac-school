@@ -1,8 +1,10 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-export default function MainLayout({ children }) {
+export default function MainLayout({ children, footerSettings: propFooterSettings }) {
+    const { footerSettings: sharedFooterSettings } = usePage().props;
+    const footerSettings = propFooterSettings || sharedFooterSettings || {};
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -197,12 +199,12 @@ export default function MainLayout({ children }) {
                                     />
                                 </div>
                                 <div className="align-center">
-                                    <h3 className="text-lg font-semibold mb-4">GTAC</h3>
+                                    <h3 className="text-lg font-semibold mb-4">{footerSettings?.company_name || 'GTAC'}</h3>
                                 </div>
                             </div>
-                            <p className="text-gray-400 mb-2">Genesis Training and Assessment Center Inc.</p>
+                            <p className="text-gray-400 mb-2">{footerSettings?.company_full_name || 'Genesis Training and Assessment Center Inc.'}</p>
                             <p className="text-gray-400">
-                                Empowering students through quality education and personalized learning experiences.
+                                {footerSettings?.description || 'Empowering students through quality education and personalized learning experiences.'}
                             </p>
                         </div>
                         <div>
@@ -218,15 +220,15 @@ export default function MainLayout({ children }) {
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-lg font-semibold mb-4">Contact</h3>
-                            <p className="text-gray-400 mb-2">Email: GTACINC2024@YAHOO.COM</p>
-                            <p className="text-gray-400 mb-2">Phone: (049) 544-7609</p>
-                            <p className="text-gray-400 mb-2">Mobile: 0928-208-4959</p>
-                            <p className="text-gray-400">Address: Phase 2, Lynville Subd., Brgy. Bagumbayan, Santa Cruz, Laguna</p>
+                            <h3 className="text-lg font-semibold mb-4">{footerSettings?.contact_title || 'Contact'}</h3>
+                            {footerSettings?.contact_email && <p className="text-gray-400 mb-2">Email: {footerSettings.contact_email}</p>}
+                            {footerSettings?.contact_phone_1 && <p className="text-gray-400 mb-2">Phone: {footerSettings.contact_phone_1}</p>}
+                            {footerSettings?.contact_phone_2 && <p className="text-gray-400 mb-2">Mobile: {footerSettings.contact_phone_2}</p>}
+                            {footerSettings?.contact_address && <p className="text-gray-400" dangerouslySetInnerHTML={{ __html: `Address: ${footerSettings.contact_address}` }} />}
                         </div>
                     </div>
                     <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-                        <p>&copy; 2025 Genesis Training and Assessment Center Inc. All rights reserved.</p>
+                        <p>{footerSettings?.copyright || '© 2025 Genesis Training and Assessment Center Inc. All rights reserved.'}</p>
                     </div>
                 </div>
             </footer>
