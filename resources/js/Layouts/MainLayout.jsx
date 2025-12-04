@@ -98,7 +98,7 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                         <div className='flex items-center justify-center'>
                             <div className="flex-shrink-0 testing-samuel-belen">
                                 <Link href="/">
-                                    <div className={`flex items-center px-3 pb-2 pt-5 rounded-b-lg transition-all duration-300 ${
+                                    <div className={`flex items-center px-3 pb-2 pt-3 rounded-b-lg transition-all duration-300 ${
                                         isScrolled 
                                             ? 'bg-white/90 backdrop-blur-sm' 
                                             : 'bg-white/90 backdrop-blur-sm'
