@@ -114,7 +114,7 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
 
                             <div className="ml-3">
                                 <span className="text-xl font-bold text-[#f0f0f0]">
-                                    GENESIS TRAINING AND ASSESSMENT CENTER
+                                    GENESIS TRAINING AND ASSESSMENT CENTER INC.
                                 </span>
                             </div>
                         </div>
