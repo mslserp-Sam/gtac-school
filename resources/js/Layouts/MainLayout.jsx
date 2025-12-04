@@ -95,22 +95,29 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                 <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo - Left */}
-                        <div className="flex-shrink-0 testing-samuel-belen">
-                            <Link href="/">
-                                <div className={`px-3 pb-2 pt-5 rounded-b-lg transition-all duration-300 ${
-                                    isScrolled 
-                                        ? 'bg-white/90 backdrop-blur-sm' 
-                                        : 'bg-white/90 backdrop-blur-sm'
-                                }`}>
-                                    <img 
-                                        src="/storage/images/gtacLogo.png" 
-                                        alt="GTAC School Logo" 
-                                        className="h-12 w-auto"
-                                    />
-                                </div>
-                            </Link>
-                        </div>
+                        <div className='flex items-center justify-center'>
+                            <div className="flex-shrink-0 testing-samuel-belen">
+                                <Link href="/">
+                                    <div className={`flex items-center px-3 pb-2 pt-5 rounded-b-lg transition-all duration-300 ${
+                                        isScrolled 
+                                            ? 'bg-white/90 backdrop-blur-sm' 
+                                            : 'bg-white/90 backdrop-blur-sm'
+                                    }`}>
+                                        <img 
+                                            src="/storage/images/gtacLogo.png" 
+                                            alt="GTAC School Logo" 
+                                            className="h-12 w-auto"
+                                        />
+                                    </div>
+                                </Link>
+                            </div>
 
+                            <div className="ml-3">
+                                <span className="text-xl font-bold text-[#f0f0f0]">
+                                    GENESIS TRAINING AND ASSESSMENT CENTER
+                                </span>
+                            </div>
+                        </div>
                         {/* Navigation Links - Right */}
                         <div className="hidden sm:flex items-center space-x-2">
                             {navigation.map((item) => (
