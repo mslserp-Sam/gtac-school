@@ -136,7 +136,7 @@ class HomeSettingsController extends Controller
 
         // Save other settings
         foreach ($validated as $key => $value) {
-            if ($value !== null && $key !== 'hero_background_image_file') {
+            if ($value !== null && $key !== 'hero_background_image_file' && $key !== 'hero_background_image') {
                 HomeSetting::set($key, $value);
             }
         }
