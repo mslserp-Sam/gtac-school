@@ -53,7 +53,7 @@ export default function Gallery({ images }) {
                     </button>
                     <div className="max-w-4xl w-full">
                         <img
-                            src={selectedImage.image_path}
+                            src={`/gtac${selectedImage.image_path}`}
                             alt={selectedImage.title || 'Gallery image'}
                             className="w-full h-auto rounded-lg"
                         />
