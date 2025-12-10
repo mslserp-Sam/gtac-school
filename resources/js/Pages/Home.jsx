@@ -5,7 +5,7 @@ import { useForm, usePage } from '@inertiajs/react';
 export default function Home({ homePage, courses, galleryImages, vision, mission, about, teamMembers, homeSettings, latitude, longitude, address }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const { flash } = usePage().props;
-    
+
     // Default settings if not provided
     const settings = homeSettings || {};
 
@@ -35,31 +35,31 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
     // Helper function to format HTML content - handles malformed HTML and plain text
     const formatHtmlContent = (content) => {
         if (!content) return '';
-        
+
         // Clean up the content
         let cleaned = content.trim();
-        
+
         // If content already has proper HTML tags, return as is
         if (cleaned.includes('<p>') || cleaned.includes('<ul>') || cleaned.includes('<ol>') || cleaned.includes('<div>')) {
             // Fix orphaned closing tags at the start
             cleaned = cleaned.replace(/^<\/(p|div|span)>/gi, '');
-            
+
             // Remove any orphaned closing tags that appear before opening tags
             cleaned = cleaned.replace(/<\/p>\s*(?=<p>)/gi, '');
-            
+
             // Fix cases where there's text followed by </p> without opening <p>
             cleaned = cleaned.replace(/^([^<]+)<\/p>/g, '<p>$1</p>');
-            
+
             return cleaned;
         }
-        
+
         // If content has some HTML tags but not paragraphs, try to preserve structure
         if (cleaned.includes('<') && cleaned.includes('>')) {
             // Fix orphaned closing tags
             cleaned = cleaned.replace(/^<\/(p|div|span)>/gi, '');
             return cleaned;
         }
-        
+
         // Plain text - wrap in paragraphs
         const paragraphs = cleaned.split(/\n\s*\n/).filter(p => p.trim());
         return paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
@@ -80,7 +80,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
             <section id="home" className="relative min-h-screen flex items-center justify-center text-white overflow-hidden parallax-section" style={{ backgroundImage: `url(${settings.hero_background_image || '/storage/images/homeBg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center center', backgroundRepeat: 'no-repeat' }}>
                 {/* Dark overlay with gradient */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70"></div>
-                
+
                 <div className="absolute inset-0 opacity-10 parallax-bg">
                     <div className="absolute inset-0 bg-pattern opacity-30"></div>
                 </div>
@@ -88,8 +88,8 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                     <div className="animate-fade-in">
                         {/* Center Text */}
                         <div className="flex flex-col items-center mb-8 animate-slide-up">
-                            <h1 className="text-6xl md:text-8xl lg:text-9xl xl:text-[9rem] font-black text-white mb-4 tracking-tight font-montserrat drop-shadow-2xl" 
-                                style={{ 
+                            <h1 className="text-6xl md:text-8xl lg:text-9xl xl:text-[9rem] font-black text-white mb-4 tracking-tight font-montserrat drop-shadow-2xl"
+                                style={{
                                     textShadow: '2px 2px 8px rgba(0,0,0,0.5), 0 0 30px rgba(55, 88, 74, 0.3)',
                                     letterSpacing: '-0.02em'
                                 }}>
@@ -99,7 +99,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <h2 className="text-lg md:text-xl lg:text-2xl font-semibold text-white/95 uppercase font-montserrat tracking-wider">
                                 {settings.hero_subtitle || 'Training & Assessment Center Inc.'}
                             </h2>
-                            { (settings.hero_tagline || '“Empowering Skills. Building Careers. Transforming Lives.”') && (
+                            {(settings.hero_tagline || '“Empowering Skills. Building Careers. Transforming Lives.”') && (
                                 <p className="mt-0 text-base md:text-lg lg:text-xl text-white/90 italic max-w-3xl mx-auto font-light">
                                     {settings.hero_tagline || '“Empowering Skills. Building Careers. Transforming Lives.”'}
                                 </p>
@@ -136,7 +136,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">About Us</h2>
                             <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full"></div>
                         </div>
-                        <div className="prose prose-lg max-w-7xl mx-auto text-gray-700 scroll-reveal  p-8 md:p-12" dangerouslySetInnerHTML={{ __html: formatHtmlContent(about.content) }}  />
+                        <div className="prose prose-lg max-w-7xl mx-auto text-gray-700 scroll-reveal  p-8 md:p-12" dangerouslySetInnerHTML={{ __html: formatHtmlContent(about.content) }} />
                     </div>
                 </section>
             )}
@@ -152,7 +152,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                 <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full"></div>
                             </div>
                         </div>
-                        
+
                         {/* Introductory Text */}
                         <div className="max-w-4xl mx-auto mb-12 text-center">
                             <p className="text-lg text-gray-700 leading-relaxed">
@@ -168,8 +168,8 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                     <div className="mb-6 relative">
                                         <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                                             {member.image_path ? (
-                                                <img 
-                                                    src={member.image_path} 
+                                                <img
+                                                    src={member.image_path}
                                                     alt={member.name}
                                                     className="w-full h-full object-cover"
                                                 />
@@ -182,7 +182,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                             )}
                                         </div>
                                     </div>
-                                    
+
                                     {/* Member Info */}
                                     <div className="w-full">
                                         <h3 className="text-2xl font-bold text-gray-900 mb-2 font-montserrat">{member.name}</h3>
@@ -214,8 +214,8 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                 <div key={course.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 scroll-reveal border border-gray-100 group">
                                     {course.image_path && (
                                         <div className="w-full h-56 overflow-hidden bg-gray-200">
-                                            <img 
-                                                src={course.image_path} 
+                                            <img
+                                                src={course.image_path}
                                                 alt={course.title}
                                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                             />
@@ -276,7 +276,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <div className="flex-shrink-0">
                                 <div className="w-20 h-20 bg-gtac-100 rounded-xl flex items-center justify-center">
                                     <svg className="w-12 h-12 text-gtac-600" fill="currentColor" viewBox="0 0 16 16">
-                                    <path fillRule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+                                        <path fillRule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5" />
                                     </svg>
                                 </div>
                             </div>
@@ -294,7 +294,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <div className="flex-shrink-0">
                                 <div className="w-20 h-20 bg-gtac-100 rounded-xl flex items-center justify-center">
                                     <svg className="w-12 h-12 text-gtac-600" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5q0 .807-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935m10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935"/>
+                                        <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5q0 .807-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935m10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935" />
                                     </svg>
                                 </div>
                             </div>
@@ -330,7 +330,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <div className="flex-shrink-0">
                                 <div className="w-20 h-20 bg-gtac-100 rounded-xl flex items-center justify-center">
                                     <svg className="w-12 h-12 text-gtac-600" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5"/>
+                                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5" />
                                     </svg>
                                 </div>
                             </div>
@@ -348,7 +348,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <div className="flex-shrink-0">
                                 <div className="w-20 h-20 bg-gtac-100 rounded-xl flex items-center justify-center">
                                     <svg className="w-12 h-12 text-gtac-600" fill="currentColor" viewBox="0 0 16 16">
-                                    <path fillRule="evenodd" d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0m3.041 9a1 1 0 0 0-.946.674l-.172.499a1 1 0 0 1-.403.515l-.803.517a1 1 0 0 0-.458.84v.455a1 1 0 0 0 1 1h.257c.192 0 .38.055.542.16l.762.491a1 1 0 0 0 .282.123A7 7 0 0 0 14.82 9.57a1 1 0 0 0-.085-.061l-.315-.204a1 1 0 0 0-.977-.06l-.169.082a1 1 0 0 1-.742.051l-1.02-.33A1 1 0 0 0 11.205 9zm-5.832 2.655a.302.302 0 1 0-.298.52l.762.325.48.232A.386.386 0 1 0 6.321 12h-.417a.7.7 0 0 1-.418-.139zM8 1a7 7 0 0 0-6.387 9.864l.754-1.285a1 1 0 0 1 1.546-.225l1.074 1.005a.986.986 0 0 0 1.36-.011l.038-.037a.88.88 0 0 0 .26-.754c-.075-.549.37-1.035.92-1.1.728-.086 1.587-.324 1.728-.957.086-.386-.115-.83-.361-1.2-.208-.312 0-.8.374-.8.122 0 .24-.055.318-.15l.393-.474c.196-.237.49-.368.797-.403.554-.065 1.407-.277 1.582-.973.185-.731-.986-.944-.998-1.62A7 7 0 0 0 8 1m.524 8.963a.413.413 0 1 0-.783-.183v.028a.46.46 0 0 1-.137.326l-.113.107a.36.36 0 0 0 .5.518l.193-.187a.6.6 0 0 0 .12-.166zm3.374-4.444c-.252-.244-.681-.139-.931.107-.256.251-.578.406-.918.585-.338.177-.264.625.101.735a.48.48 0 0 0 .345-.027l1.278-.617a.484.484 0 0 0 .125-.783"/>
+                                        <path fillRule="evenodd" d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0m3.041 9a1 1 0 0 0-.946.674l-.172.499a1 1 0 0 1-.403.515l-.803.517a1 1 0 0 0-.458.84v.455a1 1 0 0 0 1 1h.257c.192 0 .38.055.542.16l.762.491a1 1 0 0 0 .282.123A7 7 0 0 0 14.82 9.57a1 1 0 0 0-.085-.061l-.315-.204a1 1 0 0 0-.977-.06l-.169.082a1 1 0 0 1-.742.051l-1.02-.33A1 1 0 0 0 11.205 9zm-5.832 2.655a.302.302 0 1 0-.298.52l.762.325.48.232A.386.386 0 1 0 6.321 12h-.417a.7.7 0 0 1-.418-.139zM8 1a7 7 0 0 0-6.387 9.864l.754-1.285a1 1 0 0 1 1.546-.225l1.074 1.005a.986.986 0 0 0 1.36-.011l.038-.037a.88.88 0 0 0 .26-.754c-.075-.549.37-1.035.92-1.1.728-.086 1.587-.324 1.728-.957.086-.386-.115-.83-.361-1.2-.208-.312 0-.8.374-.8.122 0 .24-.055.318-.15l.393-.474c.196-.237.49-.368.797-.403.554-.065 1.407-.277 1.582-.973.185-.731-.986-.944-.998-1.62A7 7 0 0 0 8 1m.524 8.963a.413.413 0 1 0-.783-.183v.028a.46.46 0 0 1-.137.326l-.113.107a.36.36 0 0 0 .5.518l.193-.187a.6.6 0 0 0 .12-.166zm3.374-4.444c-.252-.244-.681-.139-.931.107-.256.251-.578.406-.918.585-.338.177-.264.625.101.735a.48.48 0 0 0 .345-.027l1.278-.617a.484.484 0 0 0 .125-.783" />
                                     </svg>
                                 </div>
                             </div>
@@ -366,8 +366,8 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <div className="flex-shrink-0">
                                 <div className="w-20 h-20 bg-gtac-100 rounded-xl flex items-center justify-center">
                                     <svg className="w-12 h-12 text-gtac-600" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"/>
-                                    <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                                        <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56" />
+                                        <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0" />
                                     </svg>
                                 </div>
                             </div>
@@ -385,7 +385,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <div className="flex-shrink-0">
                                 <div className="w-20 h-20 bg-gtac-100 rounded-xl flex items-center justify-center">
                                     <svg className="w-12 h-12 text-gtac-600" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.497l1.703-2.981a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.24zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.5.5 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244z"/>
+                                        <path d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.497l1.703-2.981a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.24zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.5.5 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244z" />
                                     </svg>
                                 </div>
                             </div>
@@ -419,7 +419,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                     onClick={() => setSelectedImage(image)}
                                 >
                                     <img
-                                        src={image.image_path}
+                                        src={`/gtac${image.image_path}`}
                                         alt={image.title || 'Gallery image'}
                                         className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-500"
                                     />
@@ -448,7 +448,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                         </button>
                         <div className="max-w-4xl w-full">
                             <img
-                                src={selectedImage.image_path}
+                                src={`/gtac${selectedImage.image_path}`}
                                 alt={selectedImage.title || 'Gallery image'}
                                 className="w-full h-auto rounded-lg"
                             />
@@ -471,7 +471,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                         <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full mb-4"></div>
                         <p className="text-lg text-gray-600 max-w-2xl mx-auto">Our commitment to excellence and service</p>
                     </div>
-                    
+
                     {/* About */}
                     {/* {about && (
                         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8 border border-gray-100">
@@ -516,7 +516,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                         {/* Contact Form */}
                         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 scroll-reveal border border-gray-100">
                             <h3 className="text-2xl font-bold mb-6 text-gtac-700 font-montserrat">Enrollment Inquiry</h3>
-                            
+
                             {flash?.success && (
                                 <div className="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
                                     {flash.success}
@@ -705,8 +705,8 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             </form>
                         </div>
 
-                    {/* Contact Info */}
-                    {/* <div className="bg-gradient-to-br from-gtac-50 to-white rounded-2xl shadow-xl p-8 md:p-10 border border-gtac-100">
+                        {/* Contact Info */}
+                        {/* <div className="bg-gradient-to-br from-gtac-50 to-white rounded-2xl shadow-xl p-8 md:p-10 border border-gtac-100">
                         <h3 className="text-2xl font-bold mb-6 text-gtac-700 font-montserrat">Get in Touch</h3>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
@@ -802,15 +802,15 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                 <div>
                                     <h4 className="font-semibold text-gray-700 mb-2">Contact Information</h4>
                                     <div className="flex items-center gap-2 justify-between">
-                                    <div>
-                                    {/* Temporarily hidden: {settings.contact_phone_1 && <p className="text-gray-600 mb-1">📞 {settings.contact_phone_1}</p>} */}
-                                    {settings.contact_phone_2 && <p className="text-gray-600 mb-1">📱 {settings.contact_phone_2}</p>}
-                                    </div>
-                                    <div>
+                                        <div>
+                                            {/* Temporarily hidden: {settings.contact_phone_1 && <p className="text-gray-600 mb-1">📞 {settings.contact_phone_1}</p>} */}
+                                            {settings.contact_phone_2 && <p className="text-gray-600 mb-1">📱 {settings.contact_phone_2}</p>}
+                                        </div>
+                                        <div>
 
-                                    {settings.contact_email && <p className="text-gray-600 mb-1">✉️ {settings.contact_email}</p>}
-                                    {settings.contact_facebook && <p className="text-gtac-600 mt-2">📘 Facebook: {settings.contact_facebook}</p>}
-                                    </div>
+                                            {settings.contact_email && <p className="text-gray-600 mb-1">✉️ {settings.contact_email}</p>}
+                                            {settings.contact_facebook && <p className="text-gtac-600 mt-2">📘 Facebook: {settings.contact_facebook}</p>}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

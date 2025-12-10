@@ -37,7 +37,7 @@ export default function Edit({ image }) {
     };
 
     // Show preview or current image
-    const displayImage = previewUrl || image.image_path;
+    const displayImage = previewUrl || '/gtac/' + image.image_path;
 
     return (
         <AdminLayout>
