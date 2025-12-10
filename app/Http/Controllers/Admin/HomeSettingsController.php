@@ -130,8 +130,12 @@ class HomeSettingsController extends Controller
         if ($request->hasFile('hero_background_image_file')) {
             $file = $request->file('hero_background_image_file');
             $filename = 'homeBg_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images'), $filename);
-            HomeSetting::set('hero_background_image', '/images/' . $filename);
+
+            // Save to storage/app/public/images
+            $file->storeAs('images', $filename, 'public');
+
+            // Save correct URL for frontend
+            HomeSetting::set('hero_background_image', '/storage/images/' . $filename);
         }
 
         // Save other settings
