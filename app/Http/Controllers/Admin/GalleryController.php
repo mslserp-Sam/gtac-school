@@ -33,7 +33,12 @@ class GalleryController extends Controller
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
-
+        // STEP 1 DEBUG ONLY — check what Laravel receives
+        return response()->json([
+            'all' => $request->all(),
+            'files' => array_keys($request->files->all()),
+            'has_image' => $request->hasFile('image'),
+        ]);
         // Handle image upload
         if ($request->hasFile('image')) {
             $file = $request->file('image');
