@@ -25,7 +25,7 @@ export default function Gallery({ images }) {
                                 onClick={() => setSelectedImage(image)}
                             >
                                 <img
-                                    src={image.image_path}
+                                    src={`/gtac${image.image_path}`}
                                     alt={image.title || 'Gallery image'}
                                     className="w-full h-full object-cover"
                                 />
