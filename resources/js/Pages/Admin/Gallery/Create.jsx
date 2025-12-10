@@ -30,8 +30,19 @@ export default function Create() {
 
     const submit = (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('image', data.image);
+        formData.append('title', data.title || '');
+        formData.append('description', data.description || '');
+        formData.append('category', data.category || '');
+        formData.append('sort_order', data.sort_order ?? 0);
+        formData.append('is_active', data.is_active ? 1 : 0);
+
         post('/admin/gallery', {
+            data: formData,
             forceFormData: true,
+            onError: (err) => console.log(err),
         });
     };
 
