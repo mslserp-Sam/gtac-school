@@ -26,7 +26,7 @@ export default function Index({ images }) {
                     {images.map((image) => (
                         <div key={image.id} className="bg-white rounded-lg shadow overflow-hidden">
                             <img
-                                src={image.image_path}
+                                src={`/gtac${image.image_path}`}
                                 alt={image.title || 'Gallery image'}
                                 className="w-full h-48 object-cover"
                             />
