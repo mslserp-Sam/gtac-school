@@ -1,19 +1,38 @@
 import AdminLayout from '../../../Layouts/AdminLayout';
 import { Link, useForm } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         description: '',
-        image_path: '',
+        image: null,
         category: '',
         sort_order: 0,
         is_active: true,
     });
 
+    const [previewUrl, setPreviewUrl] = useState(null);
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setData('image', file);
+
+            // Create preview URL
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewUrl(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const submit = (e) => {
         e.preventDefault();
-        post('/admin/gallery');
+        post('/admin/gallery', {
+            forceFormData: true,
+        });
     };
 
     return (
@@ -28,16 +47,27 @@ export default function Create() {
             <div className="bg-white shadow rounded-md p-8">
                 <form onSubmit={submit}>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Image URL *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Upload Image *</label>
                         <input
-                            type="text"
-                            value={data.image_path}
-                            onChange={(e) => setData('image_path', e.target.value)}
-                            placeholder="https://example.com/image.jpg"
+                            type="file"
+                            onChange={handleImageChange}
+                            accept="image/jpeg,image/png,image/jpg,image/gif,image/webp"
                             className="w-full px-4 py-2 border border-gray-300 rounded-md"
                             required
                         />
-                        {errors.image_path && <div className="text-red-500 text-sm mt-1">{errors.image_path}</div>}
+                        {errors.image && <div className="text-red-500 text-sm mt-1">{errors.image}</div>}
+
+                        {/* Image Preview */}
+                        {previewUrl && (
+                            <div className="mt-4">
+                                <p className="text-sm text-gray-600 mb-2">Preview:</p>
+                                <img
+                                    src={previewUrl}
+                                    alt="Preview"
+                                    className="w-full max-w-md h-64 object-cover rounded-md border"
+                                />
+                            </div>
+                        )}
                     </div>
 
                     <div className="mb-4">

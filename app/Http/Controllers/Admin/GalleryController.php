@@ -28,11 +28,22 @@ class GalleryController extends Controller
         $validated = $request->validate([
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'image_path' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'category' => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = 'gallery_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            
+            // Save to public/images/gallery
+            $file->move(public_path('images/gallery'), $filename);
+            
+            $validated['image_path'] = '/images/gallery/' . $filename;
+        }
 
         GalleryImage::create($validated);
 
@@ -51,11 +62,27 @@ class GalleryController extends Controller
         $validated = $request->validate([
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'image_path' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             'category' => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
+
+        // Handle image upload if new file is provided
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = 'gallery_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            
+            // Save to public/images/gallery
+            $file->move(public_path('images/gallery'), $filename);
+            
+            $validated['image_path'] = '/images/gallery/' . $filename;
+            
+            // Optional: Delete old image file
+            if ($gallery->image_path && file_exists(public_path($gallery->image_path))) {
+                @unlink(public_path($gallery->image_path));
+            }
+        }
 
         $gallery->update($validated);
 
