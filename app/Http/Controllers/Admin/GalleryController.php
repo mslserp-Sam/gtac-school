@@ -39,6 +39,7 @@ class GalleryController extends Controller
             'files' => array_keys($request->files->all()),
             'has_image' => $request->hasFile('image'),
         ]);
+        
         // Handle image upload
         if ($request->hasFile('image')) {
             $file = $request->file('image');

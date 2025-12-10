@@ -39,8 +39,8 @@ export default function Create() {
         formData.append('sort_order', data.sort_order ?? 0);
         formData.append('is_active', data.is_active ? 1 : 0);
 
-        post('/admin/gallery', {
-            data: formData,
+        // IMPORTANT: formData is 2nd arg, options is 3rd arg
+        post('/admin/gallery', formData, {
             forceFormData: true,
             onError: (err) => console.log(err),
         });
@@ -56,7 +56,7 @@ export default function Create() {
             </div>
 
             <div className="bg-white shadow rounded-md p-8">
-                <form onSubmit={submit}>
+                <form onSubmit={submit} encType="multipart/form-data">
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700 mb-2">Upload Image *</label>
                         <input
