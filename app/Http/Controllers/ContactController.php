@@ -18,7 +18,10 @@ class ContactController extends Controller
     public function store(StoreContactInquiryRequest $request)
     {
         $data = $request->validated();
-        
+        // Make sure DB 'name' column gets something (map from full_name)
+        if (isset($data['full_name']) && !isset($data['name'])) {
+            $data['name'] = $data['full_name'];
+        }
         // Save to database
         ContactInquiry::create($data);
 
