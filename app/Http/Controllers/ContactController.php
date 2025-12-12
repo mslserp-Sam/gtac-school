@@ -80,7 +80,7 @@ class ContactController extends Controller
         // Map our fields to Google Form entry IDs
         // Based on Google Form entry IDs from the form submission
         $entryIds = [
-            'entry.2117318909' => $data['has_driver_license'] ?? '', // Do you have a valid driver's license?
+            'entry.1838105934' => $data['has_driver_license'] ?? '', // Do you have a valid driver's license?
             'entry.380246004' => $data['interested_course'] ?? '', // Course/Qualification
             'entry.1059127739' => $data['full_name'] ?? '', // Full Name
             'entry.458916710' => $data['contact_number'] ?? '', // Contact Number
