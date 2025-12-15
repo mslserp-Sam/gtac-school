@@ -1,6 +1,7 @@
-import MainLayout from '../Layouts/MainLayout';
-import { useState } from 'react';
-import { useForm, usePage } from '@inertiajs/react';
+import MainLayout from '@/Layouts/MainLayout';
+import { Head, useForm, usePage } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
+import GalleryCarousel from '@/Components/GalleryCarousel';
 
 export default function Home({ homePage, courses, galleryImages, vision, mission, about, teamMembers, homeSettings, latitude, longitude, address }) {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -411,21 +412,11 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                         <p className="text-xl text-white/95 max-w-2xl mx-auto">Take a virtual tour of our facilities</p>
                     </div>
                     {galleryImages && galleryImages.length > 0 ? (
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                            {galleryImages.map((image, index) => (
-                                <div
-                                    key={image.id}
-                                    className="aspect-square overflow-hidden rounded-xl cursor-pointer transform hover:scale-110 transition-all duration-500 shadow-xl hover:shadow-2xl group border-2 border-white/20 hover:border-white/50"
-                                    onClick={() => setSelectedImage(image)}
-                                >
-                                    <img
-                                        src={`/gtac${image.image_path}`}
-                                        alt={image.title || 'Gallery image'}
-                                        className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-500"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                </div>
-                            ))}
+                        <div className="px-4 md:px-8">
+                            <GalleryCarousel
+                                images={galleryImages}
+                                onImageClick={setSelectedImage}
+                            />
                         </div>
                     ) : (
                         <div className="text-center py-16 bg-white/10 rounded-2xl backdrop-blur-sm">

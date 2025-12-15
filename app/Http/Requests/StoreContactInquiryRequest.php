@@ -27,7 +27,7 @@ class StoreContactInquiryRequest extends FormRequest
             'interested_course' => 'required|string|max:255',
             'full_name' => 'required|string|max:255',
             'contact_number' => 'required|string|max:255',
-            'email_address' => 'required|email|max:255',
+            'email_address' => 'nullable|email|max:255',
             'exact_address' => 'required|string',
             'civil_status' => 'required|string|max:255',
             'working_industry' => 'required|string|max:255',
@@ -37,6 +37,19 @@ class StoreContactInquiryRequest extends FormRequest
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string',
         ];
+    }
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        \Log::error('Validation failed', $validator->errors()->toArray());
+        parent::failedValidation($validator);
     }
 }
 
