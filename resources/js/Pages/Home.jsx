@@ -142,129 +142,49 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                 </section>
             )}
 
-            {/* Team Section */}
-            {teamMembers && teamMembers.length > 0 && (
-                <section id="team" className="py-24 bg-gtac-50 to-white scroll-reveal">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        {/* Orange Banner Header */}
-                        <div className="text-gtac-700 py-6 mb-8 rounded-t-2xl">
-                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                                <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Our Dedicated Team</h2>
-                                <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full"></div>
-                            </div>
-                        </div>
-
-                        {/* Introductory Text */}
-                        <div className="max-w-4xl mx-auto mb-12 text-center">
-                            <p className="text-lg text-gray-700 leading-relaxed">
-                                Welcome to the heart of Genesis Training & Assessment Center Inc. (GTAC), where our commitment to excellence and passion for empowering individuals converge. Our team is dedicated to being the preferred choice for career development. Join us as we empower individuals, shaping futures, and bridging the gap between aspirations and achievements. Welcome to GTAC – where skills meet success.
-                            </p>
-                        </div>
-
-                        {/* Team Members Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-                            {teamMembers.map((member) => (
-                                <div key={member.id} className="flex flex-col items-center text-center scroll-reveal">
-                                    {/* Circular Profile Image */}
-                                    <div className="mb-6 relative">
-                                        <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                                            {member.image_path ? (
-                                                <img
-                                                    src={member.image_path}
-                                                    alt={member.name}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full bg-gtac-200 flex items-center justify-center">
-                                                    <span className="text-4xl font-bold text-gtac-600">
-                                                        {member.name.charAt(0).toUpperCase()}
-                                                    </span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    {/* Member Info */}
-                                    <div className="w-full">
-                                        <h3 className="text-2xl font-bold text-gray-900 mb-2 font-montserrat">{member.name}</h3>
-                                        {member.position && (
-                                            <p className="text-lg text-gtac-600 font-semibold mb-3">{member.position}</p>
-                                        )}
-                                        {member.bio && (
-                                            <p className="text-gray-600 leading-relaxed">{member.bio}</p>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
-
-            {/* Courses Section */}
-            <section id="courses" className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16 scroll-reveal">
-                        <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Our Courses</h2>
+            {/* Vision & Mission Section */}
+            <section id="vision-mission" className="py-6 bg-gtac-50 to-white scroll-reveal">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
+                    <div className="text-center mb-16">
+                        <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Vision & Mission</h2>
                         <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full mb-4"></div>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">Discover our comprehensive range of courses designed to enhance your skills and advance your career</p>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">Our commitment to excellence and service</p>
                     </div>
-                    {courses && courses.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {courses.map((course) => (
-                                <div key={course.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 scroll-reveal border border-gray-100 group">
-                                    {course.image_path && (
-                                        <div className="w-full h-56 overflow-hidden bg-gray-200">
-                                            <img
-                                                src={course.image_path}
-                                                alt={course.title}
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                            />
-                                        </div>
-                                    )}
-                                    <div className="p-6">
-                                        {course.category && (
-                                            <span className="inline-block bg-gtac-100 text-gtac-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                                                {course.category}
-                                            </span>
-                                        )}
-                                        <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-gtac-700 transition-colors">{course.title}</h3>
-                                        <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">{course.description}</p>
-                                        <div className="space-y-2 mb-4">
-                                            {course.level && (
-                                                <p className="text-sm text-gray-600"><span className="font-semibold text-gtac-700">Level:</span> {course.level}</p>
-                                            )}
-                                            {course.duration && (
-                                                <p className="text-sm text-gray-600"><span className="font-semibold text-gtac-700">Duration:</span> {course.duration}</p>
-                                            )}
-                                        </div>
-                                        <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                                            <span className="text-gtac-600 hover:text-gtac-700 font-semibold cursor-pointer flex items-center gap-2 group-hover:gap-3 transition-all">
-                                                Learn More <span className="text-lg">→</span>
-                                            </span>
-                                            {course.brochure_path && (
-                                                <a href={course.brochure_path} download className="text-sm text-gray-500 hover:text-gtac-600 transition-colors flex items-center gap-1">
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                                    </svg>
-                                                    PDF
-                                                </a>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+
+                    {/* About */}
+                    {/* {about && (
+                        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8 border border-gray-100">
+                            <h2 className="text-3xl font-bold mb-6 text-gtac-700 font-montserrat">About Us</h2>
+                            <div className="prose prose-lg max-w-none text-gray-700" dangerouslySetInnerHTML={{ __html: formatHtmlContent(about.content) }} />
                         </div>
-                    ) : (
-                        <div className="text-center py-16 bg-gray-50 rounded-2xl">
-                            <p className="text-gray-500 text-lg">No courses available at the moment.</p>
+                    )} */}
+
+                    {/* Vision */}
+                    {vision && (
+                        <div className="bg-gradient-to-br from-gtac-50 to-gtac-100 rounded-2xl shadow-xl p-8 md:p-12 mb-8 border border-gtac-200">
+                            <h2 className="text-3xl font-bold mb-6 text-gtac-700 font-montserrat">Our Vision</h2>
+                            <div className="prose prose-lg max-w-none text-gray-700" dangerouslySetInnerHTML={{ __html: formatHtmlContent(vision.content) }} />
+                        </div>
+                    )}
+
+                    {/* Mission */}
+                    {mission && (
+                        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
+                            <h2 className="text-3xl font-bold mb-6 text-gtac-700 font-montserrat">Our Mission</h2>
+                            <div className="prose prose-lg max-w-none text-gray-700" dangerouslySetInnerHTML={{ __html: formatHtmlContent(mission.content) }} />
+                        </div>
+                    )}
+
+                    {!vision && !mission && !about && (
+                        <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
+                            <p className="text-gray-500 text-lg">Content will be added soon.</p>
                         </div>
                     )}
                 </div>
             </section>
 
             {/* Core Values Section */}
-            <section id="values" className="py-24 bg-gradient-to-b from-gtac-50 to-white">
+            <section id="values" className="py-24 bg-white scroll-reveal">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
                     <div className="text-center mb-16">
                         <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Core Values</h2>
@@ -402,6 +322,68 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                 </div>
             </section>
 
+            {/* Courses Section */}
+            <section id="courses" className="py-24 bg-gtac-50 to-white scroll-reveal">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16 scroll-reveal">
+                        <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Our Courses</h2>
+                        <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full mb-4"></div>
+                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">Discover our comprehensive range of courses designed to enhance your skills and advance your career</p>
+                    </div>
+                    {courses && courses.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {courses.map((course) => (
+                                <div key={course.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 scroll-reveal border border-gray-100 group">
+                                    {course.image_path && (
+                                        <div className="w-full h-56 overflow-hidden bg-gray-200">
+                                            <img
+                                                src={course.image_path}
+                                                alt={course.title}
+                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            />
+                                        </div>
+                                    )}
+                                    <div className="p-6">
+                                        {course.category && (
+                                            <span className="inline-block bg-gtac-100 text-gtac-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                                                {course.category}
+                                            </span>
+                                        )}
+                                        <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-gtac-700 transition-colors">{course.title}</h3>
+                                        <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">{course.description}</p>
+                                        <div className="space-y-2 mb-4">
+                                            {course.level && (
+                                                <p className="text-sm text-gray-600"><span className="font-semibold text-gtac-700">Level:</span> {course.level}</p>
+                                            )}
+                                            {course.duration && (
+                                                <p className="text-sm text-gray-600"><span className="font-semibold text-gtac-700">Duration:</span> {course.duration}</p>
+                                            )}
+                                        </div>
+                                        <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                                            <span className="text-gtac-600 hover:text-gtac-700 font-semibold cursor-pointer flex items-center gap-2 group-hover:gap-3 transition-all">
+                                                Learn More <span className="text-lg">→</span>
+                                            </span>
+                                            {course.brochure_path && (
+                                                <a href={course.brochure_path} download className="text-sm text-gray-500 hover:text-gtac-600 transition-colors flex items-center gap-1">
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                    PDF
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-center py-16 bg-gray-50 rounded-2xl">
+                            <p className="text-gray-500 text-lg">No courses available at the moment.</p>
+                        </div>
+                    )}
+                </div>
+            </section>
+
             {/* Gallery Section with Parallax */}
             <section id="gallery" className="relative py-24 bg-gradient-to-b from-gtac-600 to-gtac-700 text-white overflow-hidden parallax-section">
                 <div className="absolute inset-0 bg-black/20 parallax-bg"></div>
@@ -452,47 +434,6 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                         </div>
                     </div>
                 )}
-            </section>
-
-            {/* Vision & Mission Section */}
-            <section id="vision-mission" className="py-24 bg-gradient-to-b from-white to-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
-                    <div className="text-center mb-16">
-                        <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Vision & Mission</h2>
-                        <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full mb-4"></div>
-                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">Our commitment to excellence and service</p>
-                    </div>
-
-                    {/* About */}
-                    {/* {about && (
-                        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8 border border-gray-100">
-                            <h2 className="text-3xl font-bold mb-6 text-gtac-700 font-montserrat">About Us</h2>
-                            <div className="prose prose-lg max-w-none text-gray-700" dangerouslySetInnerHTML={{ __html: formatHtmlContent(about.content) }} />
-                        </div>
-                    )} */}
-
-                    {/* Vision */}
-                    {vision && (
-                        <div className="bg-gradient-to-br from-gtac-50 to-gtac-100 rounded-2xl shadow-xl p-8 md:p-12 mb-8 border border-gtac-200">
-                            <h2 className="text-3xl font-bold mb-6 text-gtac-700 font-montserrat">Our Vision</h2>
-                            <div className="prose prose-lg max-w-none text-gray-700" dangerouslySetInnerHTML={{ __html: formatHtmlContent(vision.content) }} />
-                        </div>
-                    )}
-
-                    {/* Mission */}
-                    {mission && (
-                        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
-                            <h2 className="text-3xl font-bold mb-6 text-gtac-700 font-montserrat">Our Mission</h2>
-                            <div className="prose prose-lg max-w-none text-gray-700" dangerouslySetInnerHTML={{ __html: formatHtmlContent(mission.content) }} />
-                        </div>
-                    )}
-
-                    {!vision && !mission && !about && (
-                        <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
-                            <p className="text-gray-500 text-lg">Content will be added soon.</p>
-                        </div>
-                    )}
-                </div>
             </section>
 
             {/* Contact Section */}
@@ -695,69 +636,68 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                 </div>
                             </form>
                         </div>
-
-                        {/* Contact Info */}
-                        {/* <div className="bg-gradient-to-br from-gtac-50 to-white rounded-2xl shadow-xl p-8 md:p-10 border border-gtac-100">
-                        <h3 className="text-2xl font-bold mb-6 text-gtac-700 font-montserrat">Get in Touch</h3>
-                        <div className="space-y-6">
-                            <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-gtac-100 rounded-lg flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-gtac-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold text-gray-700 mb-1">Email</h4>
-                                    <a href={`mailto:${settings.contact_email || 'GTACINC2024@YAHOO.COM'}`} className="text-gtac-600 hover:text-gtac-700 transition-colors">
-                                        {settings.contact_email || 'GTACINC2024@YAHOO.COM'}
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-gtac-100 rounded-lg flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-gtac-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold text-gray-700 mb-2">Phone</h4>
-                                    {settings.contact_phone_2 && (
-                                        <a href={`tel:${settings.contact_phone_2.replace(/\D/g, '')}`} className="text-gtac-600 hover:text-gtac-700 block transition-colors">
-                                            {settings.contact_phone_2}
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-gtac-100 rounded-lg flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-gtac-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold text-gray-700 mb-2">Address</h4>
-                                    <p className="text-gray-600" dangerouslySetInnerHTML={{ __html: settings.contact_address || 'Phase 2, Lynville Subd.<br />Brgy. Bagumbayan, Santa Cruz, Laguna' }} />
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <div className="flex-shrink-0 w-12 h-12 bg-gtac-100 rounded-lg flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-gtac-600" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold text-gray-700 mb-2">Facebook</h4>
-                                    <a href={settings.contact_facebook_url || '#'} target="_blank" rel="noopener noreferrer" className="text-gtac-600 hover:text-gtac-700 transition-colors">
-                                        {settings.contact_facebook || 'GENESIS TAC'}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
                     </div>
                 </div>
             </section>
+
+            {/* Team Section */}
+            {teamMembers && teamMembers.length > 0 && (
+                <section id="team" className="py-24 bg-gradient-to-b from-white to-gray-50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        {/* Orange Banner Header */}
+                        <div className="text-gtac-700 py-6 mb-8 rounded-t-2xl">
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                                <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Our Dedicated Team</h2>
+                                <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full"></div>
+                            </div>
+                        </div>
+
+                        {/* Introductory Text */}
+                        <div className="max-w-4xl mx-auto mb-12 text-center">
+                            <p className="text-lg text-gray-700 leading-relaxed">
+                                Welcome to the heart of Genesis Training & Assessment Center Inc. (GTAC), where our commitment to excellence and passion for empowering individuals converge. Our team is dedicated to being the preferred choice for career development. Join us as we empower individuals, shaping futures, and bridging the gap between aspirations and achievements. Welcome to GTAC – where skills meet success.
+                            </p>
+                        </div>
+
+                        {/* Team Members Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                            {teamMembers.map((member) => (
+                                <div key={member.id} className="flex flex-col items-center text-center scroll-reveal">
+                                    {/* Circular Profile Image */}
+                                    <div className="mb-6 relative">
+                                        <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                                            {member.image_path ? (
+                                                <img
+                                                    src={member.image_path}
+                                                    alt={member.name}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full bg-gtac-200 flex items-center justify-center">
+                                                    <span className="text-4xl font-bold text-gtac-600">
+                                                        {member.name.charAt(0).toUpperCase()}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Member Info */}
+                                    <div className="w-full">
+                                        <h3 className="text-2xl font-bold text-gray-900 mb-2 font-montserrat">{member.name}</h3>
+                                        {member.position && (
+                                            <p className="text-lg text-gtac-600 font-semibold mb-3">{member.position}</p>
+                                        )}
+                                        {member.bio && (
+                                            <p className="text-gray-600 leading-relaxed">{member.bio}</p>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Location Section */}
             <section id="location" className="py-24 bg-white">
