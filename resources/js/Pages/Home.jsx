@@ -143,7 +143,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
             )}
 
             {/* Vision & Mission Section */}
-            <section id="vision-mission" className="py-6 bg-gtac-50 to-white scroll-reveal">
+            <section id="vision-mission" className="py-24 bg-gtac-50 to-white scroll-reveal">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
                     <div className="text-center mb-16">
                         <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Vision & Mission</h2>
