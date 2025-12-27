@@ -641,10 +641,9 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
             </section>
 
             {/* Team Section */}
-            {teamMembers && teamMembers.length > 0 && (
+            {/* {teamMembers && teamMembers.length > 0 && (
                 <section id="team" className="py-24 bg-gradient-to-b from-white to-gray-50">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        {/* Orange Banner Header */}
                         <div className="text-gtac-700 py-6 mb-8 rounded-t-2xl">
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                                 <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Our Dedicated Team</h2>
@@ -652,18 +651,15 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             </div>
                         </div>
 
-                        {/* Introductory Text */}
                         <div className="max-w-4xl mx-auto mb-12 text-center">
                             <p className="text-lg text-gray-700 leading-relaxed">
                                 Welcome to the heart of Genesis Training & Assessment Center Inc. (GTAC), where our commitment to excellence and passion for empowering individuals converge. Our team is dedicated to being the preferred choice for career development. Join us as we empower individuals, shaping futures, and bridging the gap between aspirations and achievements. Welcome to GTAC – where skills meet success.
                             </p>
                         </div>
 
-                        {/* Team Members Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
                             {teamMembers.map((member) => (
                                 <div key={member.id} className="flex flex-col items-center text-center scroll-reveal">
-                                    {/* Circular Profile Image */}
                                     <div className="mb-6 relative">
                                         <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                                             {member.image_path ? (
@@ -682,7 +678,6 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                         </div>
                                     </div>
 
-                                    {/* Member Info */}
                                     <div className="w-full">
                                         <h3 className="text-2xl font-bold text-gray-900 mb-2 font-montserrat">{member.name}</h3>
                                         {member.position && (
@@ -697,7 +692,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                         </div>
                     </div>
                 </section>
-            )}
+            )} */}
 
             {/* Location Section */}
             <section id="location" className="py-24 bg-white">

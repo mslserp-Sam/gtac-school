@@ -24,11 +24,10 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
 
     const navigation = [
         { name: 'Home', href: '#home' },
+        { name: 'About Us', href: '#about' },
         { name: 'Courses', href: '#courses' },
         { name: 'Gallery', href: '#gallery' },
-        { name: 'Vision & Mission', href: '#vision-mission' },
-        { name: 'Contact', href: '#contact' },
-        { name: 'Location', href: '#location' },
+        { name: 'Enrollment Inquiry', href: '#contact' },
     ];
 
     useEffect(() => {
@@ -56,7 +55,7 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                 window.requestAnimationFrame(() => {
                     const scrollY = window.scrollY;
                     document.documentElement.style.setProperty('--scroll-y', scrollY);
-                    
+
                     // Reveal elements on scroll
                     const reveals = document.querySelectorAll('.scroll-reveal');
                     reveals.forEach((element) => {
@@ -66,7 +65,7 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                             element.classList.add('revealed');
                         }
                     });
-                    
+
                     ticking = false;
                 });
                 ticking = true;
@@ -87,25 +86,23 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Navigation */}
-            <nav className={`fixed top-0 left-0 right-0 transition-all duration-300 z-50 ${
-                isScrolled || isMenuOpen
-                    ? 'bg-gtac-600 shadow-lg' 
-                    : 'bg-transparent backdrop-blur-sm'
-            }`}>
+            <nav className={`fixed top-0 left-0 right-0 transition-all duration-300 z-50 ${isScrolled || isMenuOpen
+                ? 'bg-gtac-600 shadow-lg'
+                : 'bg-transparent backdrop-blur-sm'
+                }`}>
                 <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo - Left */}
                         <div className='flex items-center justify-center'>
                             <div className="flex-shrink-0 testing-samuel-belen">
                                 <Link href="/">
-                                    <div className={`flex items-center px-3 pb-2 pt-3 rounded-b-lg transition-all duration-300 ${
-                                        isScrolled 
-                                            ? 'bg-white/90 backdrop-blur-sm' 
-                                            : 'bg-white/90 backdrop-blur-sm'
-                                    }`}>
-                                        <img 
-                                            src="/storage/images/gtacLogo.png" 
-                                            alt="GTAC School Logo" 
+                                    <div className={`flex items-center px-3 pb-2 pt-3 rounded-b-lg transition-all duration-300 ${isScrolled
+                                        ? 'bg-white/90 backdrop-blur-sm'
+                                        : 'bg-white/90 backdrop-blur-sm'
+                                        }`}>
+                                        <img
+                                            src="/storage/images/gtacLogo.png"
+                                            alt="GTAC School Logo"
                                             className="h-12 w-auto"
                                         />
                                     </div>
@@ -131,11 +128,10 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                                             element.scrollIntoView({ behavior: 'smooth' });
                                         }
                                     }}
-                                    className={`px-3 py-2 text-md font-medium transition-colors duration-200 ${
-                                        isScrolled 
-                                            ? 'text-white hover:text-gtac-200' 
-                                            : 'text-white hover:text-gtac-200'
-                                    }`}
+                                    className={`px-3 py-2 text-md font-medium transition-colors duration-200 ${isScrolled
+                                        ? 'text-white hover:text-gtac-200'
+                                        : 'text-white hover:text-gtac-200'
+                                        }`}
                                 >
                                     {item.name}
                                 </a>
@@ -144,11 +140,10 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                         <div className="sm:hidden flex items-center">
                             <button
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-200 ${
-                                    isScrolled 
-                                        ? 'text-white hover:text-gtac-200' 
-                                        : 'text-white hover:text-gtac-200 drop-shadow-lg'
-                                }`}
+                                className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-200 ${isScrolled
+                                    ? 'text-white hover:text-gtac-200'
+                                    : 'text-white hover:text-gtac-200 drop-shadow-lg'
+                                    }`}
                                 aria-label="Toggle menu"
                             >
                                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -199,9 +194,9 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                         <div>
                             <div className="flex items-center justify-start gap-4 mb-4">
                                 <div className="flex-shrink-0 bg-white/70 rounded-full p-1">
-                                    <img 
-                                        src="/storage/images/gtacLogo.png" 
-                                        alt="GTAC Logo" 
+                                    <img
+                                        src="/storage/images/gtacLogo.png"
+                                        alt="GTAC Logo"
                                         className="h-10 md:h-17 w-auto"
                                     />
                                 </div>
@@ -243,9 +238,8 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
             {/* Scroll to Top Button */}
             <button
                 id="scroll-to-top"
-                className={`fixed bottom-8 right-8 bg-gtac-600 text-white p-3 rounded-full shadow-lg hover:bg-gtac-700 transition-all duration-300 z-50 ${
-                    showScrollTop ? 'opacity-100 visible' : 'opacity-0 invisible'
-                }`}
+                className={`fixed bottom-8 right-8 bg-gtac-600 text-white p-3 rounded-full shadow-lg hover:bg-gtac-700 transition-all duration-300 z-50 ${showScrollTop ? 'opacity-100 visible' : 'opacity-0 invisible'
+                    }`}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
