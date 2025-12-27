@@ -109,14 +109,22 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                                 </Link>
                             </div>
 
-                            <div className="ml-3">
+                            {/* Company name - hidden on small screens, visible on md and up */}
+                            <div className="ml-3 hidden md:block">
                                 <span className="text-xl font-bold text-[#f0f0f0]">
                                     GENESIS TRAINING AND ASSESSMENT CENTER INC.
                                 </span>
                             </div>
+
+                            {/* Abbreviated name for small screens */}
+                            <div className="ml-3 md:hidden">
+                                <span className="text-lg font-bold text-[#f0f0f0]">
+                                    GTAC
+                                </span>
+                            </div>
                         </div>
-                        {/* Navigation Links - Right */}
-                        <div className="hidden sm:flex items-center space-x-2">
+                        {/* Navigation Links - Right - hidden on medium screens and below */}
+                        <div className="hidden lg:flex items-center space-x-2">
                             {navigation.map((item) => (
                                 <a
                                     key={item.name}
@@ -137,7 +145,8 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                                 </a>
                             ))}
                         </div>
-                        <div className="sm:hidden flex items-center">
+                        {/* Hamburger menu button - visible on medium screens and below */}
+                        <div className="lg:hidden flex items-center">
                             <button
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                                 className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-200 ${isScrolled
@@ -158,9 +167,10 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                     </div>
                 </div>
 
-                {/* Mobile menu */}
-                {isMenuOpen && (
-                    <div className="sm:hidden bg-gtac-600 shadow-lg">
+                {/* Mobile menu - with slide animation */}
+                <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}>
+                    <div className="bg-gtac-600 shadow-lg">
                         <div className="pt-2 pb-3 space-y-1">
                             {navigation.map((item) => (
                                 <a
@@ -174,14 +184,14 @@ export default function MainLayout({ children, footerSettings: propFooterSetting
                                             setIsMenuOpen(false);
                                         }
                                     }}
-                                    className="border-transparent text-white hover:bg-gtac-700 hover:border-gtac-400 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer transition-colors"
+                                    className="border-transparent text-white hover:bg-gtac-700 hover:border-gtac-400 block pl-3 pr-4 py-3 border-l-4 text-base font-medium cursor-pointer transition-all duration-200"
                                 >
                                     {item.name}
                                 </a>
                             ))}
                         </div>
                     </div>
-                )}
+                </div>
             </nav>
 
             {/* Main Content */}
