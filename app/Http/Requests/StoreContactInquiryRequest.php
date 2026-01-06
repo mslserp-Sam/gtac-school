@@ -23,14 +23,16 @@ class StoreContactInquiryRequest extends FormRequest
     {
         return [
             'email' => 'required|email|max:255',
-            'has_driver_license' => 'required|string|in:yes,no',
             'interested_course' => 'required|string|max:255',
             'full_name' => 'required|string|max:255',
             'contact_number' => 'required|string|max:255',
             'email_address' => 'nullable|email|max:255',
-            'exact_address' => 'required|string',
-            'civil_status' => 'required|string|max:255',
-            'working_industry' => 'required|string|max:255',
+            'educational_background' => 'required|string|max:255',
+            'working_industry' => 'nullable|string|max:255',
+            // Removed fields (kept nullable for backward compatibility)
+            'has_driver_license' => 'nullable|string|in:yes,no',
+            'exact_address' => 'nullable|string',
+            'civil_status' => 'nullable|string|max:255',
             // Keep for backward compatibility
             'name' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:255',

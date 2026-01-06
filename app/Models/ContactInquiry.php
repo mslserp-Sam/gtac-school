@@ -20,6 +20,7 @@ class ContactInquiry extends Model
         'contact_number',
         'exact_address',
         'working_industry',
+        'educational_background',
         'civil_status',
         'subject',
         'message',

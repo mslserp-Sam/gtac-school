@@ -68,13 +68,11 @@ class ContactController extends Controller
         // Correct Google Form entry IDs (your working IDs)
         $entryIds = [
             'entry.1532759976' => $data['email'] ?? $data['email_address'] ?? '', // Email Address
-            'entry.1838105934' => $data['has_driver_license'] ?? '',             // Driver License: yes/no
             'entry.380246004'  => $data['interested_course'] ?? '',             // Course
             'entry.1059127739' => $data['full_name'] ?? '',                     // Full Name
             'entry.458916710'  => $data['contact_number'] ?? '',                // Contact Number
-            'entry.1410028182' => $data['civil_status'] ?? '',                  // Civil Status
-            'entry.661506845'  => $data['working_industry'] ?? '',              // Industry
-            'entry.1385080086' => $data['exact_address'] ?? '',                 // Address
+            'entry.661506845'  => $data['working_industry'] ?? '',              // Working Experience (optional)
+            'entry.1385080086' => $data['educational_background'] ?? '',        // Educational Background (reusing exact_address ID)
         ];
 
         // Remove empty fields (Google accepts partial submissions if non-required fields exist)

@@ -13,13 +13,14 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
     // Contact form
     const { data: contactData, setData: setContactData, post: contactPost, processing: contactProcessing, errors: contactErrors, reset: contactReset } = useForm({
         email: '',
-        has_driver_license: '',
+        // has_driver_license: '',
         interested_course: '',
         full_name: '',
         contact_number: '',
         email_address: '',
         exact_address: '',
-        civil_status: '',
+        // civil_status: '',
+        educational_background: '',
         working_industry: '',
     });
 
@@ -458,20 +459,6 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                             <form onSubmit={handleContactSubmit} className="space-y-5">
                                 {/* Top Section - Email, Driver's License, Course */}
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    {/* Email */}
-                                    <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
-                                        <input
-                                            type="email"
-                                            required
-                                            value={contactData.email}
-                                            onChange={(e) => setContactData('email', e.target.value)}
-                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
-                                            placeholder="your.email@example.com"
-                                        />
-                                        {contactErrors.email && <div className="text-red-500 text-sm mt-1">{contactErrors.email}</div>}
-                                    </div>
-
                                     {/* Course Selection */}
                                     <div>
                                         <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -492,8 +479,22 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                         </select>
                                         {contactErrors.interested_course && <div className="text-red-500 text-sm mt-1">{contactErrors.interested_course}</div>}
                                     </div>
+                                    {/* Email */}
+                                    {/* <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-2">Email <span className="text-red-500">*</span></label>
+                                        <input
+                                            type="email"
+                                            required
+                                            value={contactData.email}
+                                            onChange={(e) => setContactData('email', e.target.value)}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
+                                            placeholder="your.email@example.com"
+                                        />
+                                        {contactErrors.email && <div className="text-red-500 text-sm mt-1">{contactErrors.email}</div>}
+                                    </div> */}
+
                                     {/* Driver's License */}
-                                    <div>
+                                    {/* <div>
                                         <label className="block text-sm font-semibold text-gray-700 mb-2">
                                             Do you have a valid driver's license? <span className="text-red-500">*</span>
                                         </label>
@@ -524,7 +525,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                             </label>
                                         </div>
                                         {contactErrors.has_driver_license && <div className="text-red-500 text-sm mt-1">{contactErrors.has_driver_license}</div>}
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 {/* Personal Information Section */}
@@ -532,7 +533,7 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                     <h3 className="text-xl font-bold mb-4 text-gtac-700">Personal Information</h3>
 
                                     {/* Row 1: Full Name and Contact Number */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div className="grid grid-cols-1 gap-4 mb-4">
                                         {/* Full Name */}
                                         <div>
                                             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -544,32 +545,16 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                                 value={contactData.full_name}
                                                 onChange={(e) => setContactData('full_name', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
-                                                placeholder="First Middle Last Name"
+                                                placeholder="First, Middle, Last Name"
                                             />
                                             {contactErrors.full_name && <div className="text-red-500 text-sm mt-1">{contactErrors.full_name}</div>}
-                                        </div>
-
-                                        {/* Contact Number */}
-                                        <div>
-                                            <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                                CONTACT NO. <span className="text-red-500">*</span>
-                                            </label>
-                                            <input
-                                                type="tel"
-                                                required
-                                                value={contactData.contact_number}
-                                                onChange={(e) => setContactData('contact_number', e.target.value)}
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
-                                                placeholder="09XX-XXX-XXXX"
-                                            />
-                                            {contactErrors.contact_number && <div className="text-red-500 text-sm mt-1">{contactErrors.contact_number}</div>}
                                         </div>
                                     </div>
 
                                     {/* Row 2: Civil Status */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         {/* Civil Status */}
-                                        <div>
+                                        {/* <div>
                                             <label className="block text-sm font-semibold text-gray-700 mb-2">
                                                 CIVIL STATUS <span className="text-red-500">*</span>
                                             </label>
@@ -587,15 +572,28 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                                 <option value="Separated">Separated</option>
                                             </select>
                                             {contactErrors.civil_status && <div className="text-red-500 text-sm mt-1">{contactErrors.civil_status}</div>}
+                                        </div> */}
+                                        {/* Educational Background */}
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                                EDUCATIONAL BACKGROUND <span className="text-red-500">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={contactData.educational_background}
+                                                onChange={(e) => setContactData('educational_background', e.target.value)}
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
+                                                placeholder="e.g., IT, Healthcare, Education, etc."
+                                            />
+                                            {contactErrors.educational_background && <div className="text-red-500 text-sm mt-1">{contactErrors.educational_background}</div>}
                                         </div>
                                         {/* Working Industry/Experience */}
                                         <div>
                                             <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                                WORKING INDUSTRY/WORKING EXPERIENCE <span className="text-red-500">*</span>
+                                                WORKING EXPERIENCE <span className="text-black-500">(if any)</span>
                                             </label>
                                             <input
                                                 type="text"
-                                                required
                                                 value={contactData.working_industry}
                                                 onChange={(e) => setContactData('working_industry', e.target.value)}
                                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
@@ -606,9 +604,9 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                     </div>
 
                                     {/* Row 3: Exact Address and Working Industry */}
-                                    <div className="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4">
+                                    {/* <div className="grid grid-cols-1 md:grid-cols-1 gap-4 mb-4">
                                         {/* Exact Address */}
-                                        <div>
+                                    {/* <div>
                                             <label className="block text-sm font-semibold text-gray-700 mb-2">
                                                 EXACT ADDRESS <span className="text-red-500">*</span>
                                             </label>
@@ -621,10 +619,47 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
                                                 placeholder="Street, Barangay, City, Province"
                                             />
                                             {contactErrors.exact_address && <div className="text-red-500 text-sm mt-1">{contactErrors.exact_address}</div>}
+                                        </div> */}
+                                    {/* </div> */}
+                                </div>
+                                {/* Contact Details Section */}
+                                <div className="border-t border-gray-300 pt-6 mt-6">
+                                    <h3 className="text-xl font-bold mb-4 text-gtac-700">Contact Details</h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        {/* Email Address */}
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                                EMAIL <span className="text-red-500">*</span>
+                                            </label>
+                                            <input
+                                                type="email"
+                                                required
+                                                value={contactData.email}
+                                                onChange={(e) => setContactData('email', e.target.value)}
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
+                                                placeholder="example@example.com"
+                                            />
+                                            {contactErrors.email && <div className="text-red-500 text-sm mt-1">{contactErrors.email}</div>}
                                         </div>
+
+                                        {/* Contact Number */}
+                                        <div>
+                                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                                CONTACT NO. <span className="text-red-500">*</span>
+                                            </label>
+                                            <input
+                                                type="tel"
+                                                required
+                                                value={contactData.contact_number}
+                                                onChange={(e) => setContactData('contact_number', e.target.value)}
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gtac-500 focus:border-gtac-500 transition-all"
+                                                placeholder="09XX-XXX-XXXX"
+                                            />
+                                            {contactErrors.contact_number && <div className="text-red-500 text-sm mt-1">{contactErrors.contact_number}</div>}
+                                        </div>
+
                                     </div>
                                 </div>
-
                                 <div className="flex justify-end">
                                     <button
                                         type="submit"
