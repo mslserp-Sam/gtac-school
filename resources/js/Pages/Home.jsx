@@ -440,14 +440,14 @@ export default function Home({ homePage, courses, galleryImages, vision, mission
             <section id="contact" className="py-24 bg-gtac-50 to-white test">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16 scroll-reveal">
-                        <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Contact Us</h2>
+                        <h2 className="text-5xl font-bold mb-4 text-gtac-700 font-montserrat">Enrollment Inquiry</h2>
                         <div className="h-1 w-20 bg-gtac-600 mx-auto rounded-full mb-4"></div>
                         <p className="text-xl text-gray-600 max-w-2xl mx-auto">We'd love to hear from you. Get in touch with us today!</p>
                     </div>
                     <div className="max-w-7xl mx-auto">
                         {/* Contact Form */}
                         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 scroll-reveal border border-gray-100">
-                            <h3 className="text-2xl font-bold mb-6 text-gtac-700 font-montserrat">Enrollment Inquiry</h3>
+                            <h3 className="text-2xl font-bold mb-6 text-gtac-700 font-montserrat">Sign Up</h3>
 
                             {flash?.success && (
                                 <div className="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">

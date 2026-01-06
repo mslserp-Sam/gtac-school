@@ -25,7 +25,7 @@ export default function Contact() {
         <MainLayout>
             <div className="bg-gradient-to-r from-gtac-600 to-gtac-700 text-white py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+                    <h1 className="text-4xl font-bold mb-4">Enrollment Inquiry</h1>
                     <p className="text-xl text-white/90">
                         We'd love to hear from you. Send us a message and we'll respond as soon as possible.
                     </p>
@@ -42,7 +42,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Contact Form */}
                     <div className="bg-white rounded-lg shadow-lg p-8">
-                        <h2 className="text-2xl font-bold mb-6">Enrollment Inquiry</h2>
+                        <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
                         <form onSubmit={submit}>
                             {/* Email */}
                             <div className="mb-4">
