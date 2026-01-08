@@ -8,10 +8,10 @@ export default function Edit({ mustVerifyEmail, status }) {
     return (
         <AdminLayout>
             <Head title="Profile" />
-            
+
             <div>
                 <h1 className="text-3xl font-bold mb-8 text-gray-900">Profile Settings</h1>
-                
+
                 <div className="space-y-6">
                     <div className="bg-white rounded-lg shadow-md p-8">
                         <UpdateProfileInformationForm
@@ -24,9 +24,9 @@ export default function Edit({ mustVerifyEmail, status }) {
                         <UpdatePasswordForm />
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-md p-8">
+                    {/* <div className="bg-white rounded-lg shadow-md p-8">
                         <DeleteUserForm />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </AdminLayout>
