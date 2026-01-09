@@ -135,7 +135,7 @@ class HomeSettingsController extends Controller
         $file->move(public_path('images'), $filename);
 
         // Save correct path
-        HomeSetting::set('hero_background_image', '/images/' . $filename);
+        HomeSetting::set('hero_background_image', '/gtac/images/' . $filename);
         }
 
         // Save other settings
